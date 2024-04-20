@@ -69,30 +69,35 @@
         <div class="add-form">
           <h3 class="heading">Add/Edit Blog</h3>
           <div class="form-container">
-            <form action="">
+            <form action="<?php echo $_SERVER['php_self'] ?>" method="POST" onsubmit="return validateBlog()">
               <div class="form-input">
                 <label for="name">Blog Title</label>
-                <input type="text" name="name" id="name" />
+                <input type="text" name="name" id="b-name" />
+                <p class="error" id="b-name-error"></p>
               </div>
               <div class="form-input">
                 <label for="category">Category</label>
                 <br>
-                <select name="category" id="category">
-                  <option value="">Buddha</option>
-                  <option value="">Green Tara</option>
-                  <option value="">Mandala</option>
-                  <option value="">Manjushree</option>
+                <select name="category" id="b-category">
+                  <option value="">Select Category</option>
+                  <option value="Buddha">Buddha</option>
+                  <option value="Green Tara">Green Tara</option>
+                  <option value="Mandala">Mandala</option>
+                  <option value="Manjushree">Manjushree</option>
                 </select>
+                <p class="error" id="b-category-error"></p>
               </div>
               <div class="form-input">
                 <label for="description">Description</label>
-                <textarea name="description" id="description"rows="5"></textarea>
+                <textarea name="description" id="b-description"rows="5"></textarea>
+                <p class="error" id="b-description-error"></p>
               </div>
               <div class="form-input">
                 <label for="image">Upload Image</label>
-                <input type="file" name="image" id="image" />
+                <input type="file" name="image" id="b-image" />
+                <p class="error" id="b-image-error"></p>
               </div>
-              <button type="submit" class="btn-submit">Submit</button>
+              <button type="submit" class="btn-submit" id="">Submit</button>
             </form>
           </div>
         </div>

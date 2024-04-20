@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="admin-style.css" />
   </head>
   <body>
+    <?php
+    ?>
     <div class="layout-container">
       <aside class="sidebar">
         <h2>Logo</h2>
@@ -69,13 +71,14 @@
         <div class="add-form">
           <h3 class="heading">Add/Edit Blog Category</h3>
           <div class="form-container">
-            <form action="" onsubmit="return validateCate()">
+            <form action="<?php echo $_SERVER['php_self']?>" onsubmit="return validateCate()" method="POST">
               <div class="form-input">
                 <label for="category-name">Category Name</label>
                 <input type="text" name="name" id="category-name" />
                 <p class="error" id="categoryErr"></p>
               </div>
               <button type="submit" class="btn-submit">Submit</button>
+              <p class="success"> <?php echo $Msg?></p>
             </form>
           </div>
         </div>
