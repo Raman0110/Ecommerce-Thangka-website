@@ -11,7 +11,49 @@
 </head>
 
 <body>
+  <?php
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    include 'connect.php';
+    $registermsg = "";
+    if (isset($_POST['login'])) {
+      $userName = $_POST['username'];
+      $password = $_POST['password'];
+      $userErr = '';
+      $sql = "SELECT * FROM users where username = '$userName' and password = '$password'";
+      $result = mysqli_query($conn, $sql);
+      if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $isAdmin = $row['isadmin'];
+        if($isAdmin){
+          header('location:Admin/dashboard.html');
+        }else{
+          header('location:index.html');
+        }
+      } else {
+        $userErr = 'Invalid username or passowrd';
+      }
+    } elseif (isset($_POST['submit'])) {
+      $userName = $_POST['nusername'];
+      $phone = $_POST['phone'];
+      $email = $_POST['email'];
+      $password = $_POST['npassword'];
+      $sql = "INSERT INTO users(username,phone,email,password) values('$userName','$phone','$email','$password')";
+      $result = mysqli_query($conn, $sql);
+      if ($result) {
+        $registermsg = "User account created you may login";
+      }else{
+        $registermsg = "User account creation failed";
+      }
+    }
+  }
+
+
+
+
+  ?>
   <div class="form-container">
+    <div>
+      <?php echo $registermsg?>
     <div class="form-box">
       <div class="option-btn">
         <button class="tab-btn btn active-btn" data-target="#login-form">
@@ -23,48 +65,50 @@
       </div>
       <h2>Welcome</h2>
       <div class="login-form forms-tab d-block" id="login-form">
-        <form action="" onsubmit="return validateLogin()">
+        <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateLogin()" method="POST">
           <div class="flex">
-            <i class="fa fa-user"></i><input type="text" name="" id="l-username" placeholder="Username" />
+            <i class="fa fa-user"></i><input type="text" name="username" id="l-username" placeholder="Username" />
           </div>
           <p class="error" id="l-username-err"></p>
           <div class="flex">
-            <i class="fa fa-key"></i><input type="password" name="" id="l-password" placeholder="Password" />
+            <i class="fa fa-key"></i><input type="password" name="password" id="l-password" placeholder="Password" />
           </div>
           <p class="error" id="l-password-err"></p>
-          <button type="submit" class="login-submit btn" id="login-btn">
+          <p class="error"><?php echo $userErr ?></p>
+          <button type="submit" class="login-submit btn" id="login-btn" name="login">
             Login
           </button>
         </form>
       </div>
       <div class="register-form forms-tab" id="register-form">
-        <form action="" onsubmit="return validateSignup()">
+        <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateSignup()" method="POST">
           <div class="flex">
-            <i class="fa fa-user"></i><input type="text" name="" id="r-username" placeholder="Username" />
+            <i class="fa fa-user"></i><input type="text" name="nusername" id="r-username" placeholder="Username" />
           </div>
           <p class="error" id="r-username-err"></p>
           <div class="flex">
-            <i class="fa fa-phone"></i><input type="number" name="" id="phone" placeholder="Phone" />
+            <i class="fa fa-phone"></i><input type="number" name="phone" id="phone" placeholder="Phone" />
           </div>
           <p class="error" id="phone-err"></p>
           <div class="flex">
-            <i class="fa fa-envelope"></i><input type="email" name="" id="email" placeholder="Email" />
+            <i class="fa fa-envelope"></i><input type="email" name="email" id="email" placeholder="Email" />
           </div>
           <p class="error" id="email-err"></p>
           <div class="flex">
-            <i class="fa fa-key"></i><input type="password" name="" id="password" placeholder="Password" />
+            <i class="fa fa-key"></i><input type="password" name="npassword" id="password" placeholder="Password" />
           </div>
           <p class="error" id="r-password-err"></p>
           <div class="flex">
-            <i class="fa fa-key"></i><input type="password" name="" id="c-password" placeholder="Confirm Password" />
+            <i class="fa fa-key"></i><input type="password" name="cpassword" id="c-password" placeholder="Confirm Password" />
           </div>
           <p class="error" id="r-cpassword-err"></p>
-          <button type="submit" class="login-submit btn" id="signup-btn">
+          <button type="submit" class="login-submit btn" id="signup-btn" name="submit">
             Signup
           </button>
         </form>
       </div>
     </div>
+  </div>
   </div>
   <script>
     const tabBtns = document.querySelectorAll(".tab-btn");
@@ -78,6 +122,7 @@
         document.querySelector(btnAttribute).classList.add("d-block");
       });
     });
+
     function validateLogin() {
       const loginUname = document.querySelector("#l-username");
       const loginPassword = document.querySelector("#l-password");
@@ -95,6 +140,7 @@
       }
       return isValid;
     }
+
     function validateSignup() {
       const signupUname = document.querySelector("#r-username");
       const phone = document.querySelector("#phone");
