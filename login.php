@@ -25,7 +25,7 @@
         $row = mysqli_fetch_assoc($result);
         $isAdmin = $row['isadmin'];
         if($isAdmin){
-          header('location:Admin/dashboard.html');
+          header('location:Admin/dashboard.php');
         }else{
           header('location:index.html');
         }
