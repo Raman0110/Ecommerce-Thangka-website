@@ -81,7 +81,7 @@
           </div>
         </div>
         <div class="add-form">
-          <h3 class="heading">Add/Edit Product Category</h3>
+          <h3 class="heading">Add Product Category</h3>
           <div class="form-container">
             <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateCate()" method="POST">
               <div class="form-input">

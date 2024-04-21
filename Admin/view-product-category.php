@@ -70,38 +70,36 @@
                 <th>Name</th>
                 <th>Action</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Buddha</td>
-                <td>
-                  <a href="add-product-category.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Mandala</td>
-                <td>
-                  <a href="add-product-category.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Green Tara</td>
-                <td>
-                  <a href="add-product-category.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Manjushree</td>
-                <td>
-                  <a href="add-product-category.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
+              <?php
+              include '../connect.php';
+              $sql = 'SELECT * FROM categories';
+              $result = mysqli_query($conn, $sql);
+              if($result){
+                if(mysqli_num_rows($result)>0){
+                  $i = 1;
+                  while($row = mysqli_fetch_assoc($result)){
+                    echo 
+                    "<tr>
+                    <td>".$i."</td>
+                    <td>".$row['Name']."</td>
+                    <td>
+                      <a href='add-product-category.php' class='btn-edit'>Edit</a>
+                      <a href='' class='btn-delete'>Delete</a>
+                    </td>
+                  </tr>";
+                  $i++;
+                  }
+                }else{
+                  echo 'No data found'; 
+                }
+              }else{
+                echo mysqli_connect_error();
+              }
+              
+              
+              
+              
+              ?>
             </table>
         </div>
       </main>

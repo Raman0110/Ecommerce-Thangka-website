@@ -20,17 +20,19 @@
     $description = $_POST['description'];
     $uploadDir = '../uploads/';
     $fileName = $_FILES['image']['name'];
-    $targetPath = $uploadDir.$fileName;
-    echo $targetPath;
+    $targetDir = $uploadDir.$fileName;
+    $date = date("Y-m-d");
     include '../connect.php';
-    $sql = "INSERT INTO products(Title,Description,Price,Dimensions,Image_URL,Category_ID) values('$productName','$description','$price','$size','$fileName','$category')";
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
+      $sql = "INSERT INTO products(Title,Description,Price,Dimensions,Image_URL,Date,Category_ID) values('$productName','$description','$price','$size','$fileName','$date','$category')";
     $result  = mysqli_query($conn, $sql);
-    if ($result) {
-      if(move_uploaded_file($_FILES['image']['tmp_name'],$targetPath)){
-        $msg = "Product added successfully";
+      if ($result) {
+        $Msg = 'Product added successfully';
+      }else{
+        $Msg = 'Unable to add post';
       }
     } else {
-      $msg = "Something went wrong unable to add product";
+      $Msg = 'Error uploading file';
     }
   }
   ?>
@@ -89,9 +91,9 @@
         </div>
       </div>
       <div class="add-form">
-        <h3 class="heading">Add/Edit Product</h3>
+        <h3 class="heading">Add Product</h3>
         <div class="form-container">
-          <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateProduct()" method="POST" enctype="multipart/form-data">
+          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateProduct()" method="POST" enctype="multipart/form-data">
             <div class="form-input">
               <label for="p-name">Product Name</label>
               <input type="text" name="p-name" id="p-name" />
@@ -136,7 +138,7 @@
               <p class="error" id="image-error"></p>
             </div>
             <button type="submit" class="btn-submit">Submit</button>
-            <p class="success"><?php $msg ?></p>
+            <p class="success"><?php echo $Msg ?> </p>
           </form>
         </div>
       </div>

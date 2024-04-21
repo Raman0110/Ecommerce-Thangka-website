@@ -13,6 +13,17 @@
   </head>
   <body>
     <?php
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+      $name = $_POST['name'];
+      include '../connect.php';
+      $sql = "INSERT INTO blogCategories(name) values ('$name')";
+      $result = mysqli_query($conn,$sql);
+      if($result){
+        $Msg = 'Blog Category added successfully';
+      }else{
+        $Msg = mysqli_connect_error();
+      }
+    }
     ?>
     <div class="layout-container">
       <aside class="sidebar">
@@ -69,7 +80,7 @@
           </div>
         </div>
         <div class="add-form">
-          <h3 class="heading">Add/Edit Blog Category</h3>
+          <h3 class="heading">Add Blog Category</h3>
           <div class="form-container">
             <form action="<?php echo $_SERVER['php_self']?>" onsubmit="return validateCate()" method="POST">
               <div class="form-input">

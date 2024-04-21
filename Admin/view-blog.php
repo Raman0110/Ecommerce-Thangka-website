@@ -71,42 +71,35 @@
                 <th>Date</th>
                 <th>Action</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Buddha's Life Story</td>
-                <td>12/04/2024</td>
-                <td>
-                  <a href="add-blog.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Mandala Art Facts</td>
-                <td>12/04/2024</td>
-                <td>
-                  <a href="add-blog.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>100+ Mandala Thankas</td>
-                <td>12/04/2024</td>
-                <td>
-                  <a href="add-blog.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Facts About Devi Green Tara</td>
-                <td>12/04/2024</td>
-                <td>
-                  <a href="add-blog.php" class="btn-edit">Edit</a>
-                  <a href="" class="btn-delete">Delete</a>
-                </td>
-              </tr>
+              <?php
+                include '../connect.php';
+                $sql = 'SELECT * FROM blogs';
+                $result = mysqli_query($conn,$sql);
+                if($result){
+                  if(mysqli_num_rows($result)>0){
+                    $i = 1;
+                    while($row = mysqli_fetch_assoc($result)){
+                      echo 
+                      "<tr>
+                      <td>".$i."</td>
+                      <td>".$row['title']."</td>
+                      <td>".$row['Date']."</td>
+                      <td>
+                        <a href='add-blog.php' class='btn-edit'>Edit</a>
+                        <a href='' class='btn-delete'>Delete</a>
+                      </td>
+                    </tr>";
+                    }
+                    $i++;
+                  }else{
+                    echo "No data found";
+                  }
+                }else{
+                  echo mysqli_connect_error();
+                }
+              
+              
+              ?>
             </table>
         </div>
       </main>

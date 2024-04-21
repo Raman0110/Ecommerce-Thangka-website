@@ -412,6 +412,13 @@ footer{
     height: 250px;
     width: 100%;
     object-fit: cover;
+    margin-bottom: .5rem;
+}
+.category{
+    display: inline;
+    background-color: var(--green);
+    padding: 3px;
+    color: white;
 }
 .related-product{
     width: 100%;
