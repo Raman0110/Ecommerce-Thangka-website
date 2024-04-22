@@ -85,20 +85,18 @@
                       <td>".$row['title']."</td>
                       <td>".$row['Date']."</td>
                       <td>
-                        <a href='add-blog.php' class='btn-edit'>Edit</a>
+                        <a href='edit-blog.php?id=".$row['id']."' class='btn-edit'>Edit</a>
                         <a href='' class='btn-delete'>Delete</a>
                       </td>
                     </tr>";
-                    }
                     $i++;
+                    }
                   }else{
                     echo "No data found";
                   }
                 }else{
                   echo mysqli_connect_error();
                 }
-              
-              
               ?>
             </table>
         </div>

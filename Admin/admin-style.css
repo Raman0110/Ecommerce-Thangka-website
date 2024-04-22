@@ -185,9 +185,10 @@ ul {
   margin-bottom: 8px;
 }
 .form-input input,
-.form-input textarea {
+#b-description {
   width: 100%!important;
   padding: 8px;
+  white-space: nowrap;
   outline: none;
   border-radius: 5px;
   border: 1px solid grey;
