@@ -82,7 +82,7 @@ function validateBlog() {
   const bCategoryErr = document.querySelector('#b-category-error');
   const bDescriptionErr = document.querySelector('#b-description-error');
   const imageErr = document.querySelector('#b-image-error');
-  const allowedTypes = ['image/jpg', 'image/jpeg', 'image.png'];
+  const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
   bNameErr.innerHTML = bCategoryErr.innerHTML = bDescriptionErr.innerHTML = imageErr.innerHTML = "";
   let isvalid = true;
   if (blogName.value == "") {
@@ -106,7 +106,6 @@ function validateBlog() {
   } else {
     isvalid = false;
     imageErr.innerHTML = "Upload a image";
-
   }
 
   return isvalid;

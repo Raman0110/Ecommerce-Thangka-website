@@ -13,6 +13,7 @@
   </head>
   <body>
     <?php
+    $Msg = '';
     if($_SERVER['REQUEST_METHOD']=="POST"){
       $categoryName = $_POST['category-name'];
       include '../connect.php';
@@ -83,7 +84,7 @@
         <div class="add-form">
           <h3 class="heading">Add Product Category</h3>
           <div class="form-container">
-            <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateCate()" method="POST">
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateCate()" method="POST">
               <div class="form-input">
                 <label for="category-name">Category Name</label>
                 <input type="text" name="category-name" id="category-name" />

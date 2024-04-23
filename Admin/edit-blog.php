@@ -12,6 +12,7 @@
 
 <body>
     <?php
+    $Msg = '';
     include '../connect.php';
     $id = $_GET['id'];
     $sql = "SELECT * FROM blogs WHERE id = $id";
@@ -21,10 +22,6 @@
             $row = mysqli_fetch_assoc($result);
         }
     }
-
-
-
-
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = $_POST['name'];
@@ -106,7 +103,7 @@
             <div class="add-form">
                 <h3 class="heading">Edit Blog</h3>
                 <div class="form-container">
-                    <form action="<?php echo $_SERVER['php_self'] ?>" method="POST" onsubmit="return validateBlog()" enctype="multipart/form-data">
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="return validateBlog()" enctype="multipart/form-data">
                         <div class="form-input">
                             <label for="name">Blog Title</label>
                             <input type="text" name="name" id="b-name" value = "<?php echo $row['title']?>"/>
@@ -124,11 +121,7 @@
                                 if ($result) {
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row1 = mysqli_fetch_assoc($result)) {
-                                            if($row['categoryId']==$row1['id']){
-                                                echo "<option value = '" . $row1['id'] . "' selected>" . $row1['name'] . "</option>";
-                                            }else{
-                                                echo "<option value = '" . $row1['id'] . "'>" . $row1['name'] . "</option>";
-                                            }
+                                            echo "<option value='" . $row1['id'] . "' " . (($row['categoryId'] == $row1['id']) ? "selected" : "") . ">" . $row1['name'] . "</option>";
                                         }
                                     }
                                 }

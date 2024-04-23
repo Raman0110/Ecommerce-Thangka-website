@@ -12,6 +12,7 @@
 
 <body>
   <?php
+  $Msg = '';
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
@@ -20,7 +21,7 @@
     $uploadDir = '../uploads/';
     $fileName = $_FILES['image']['name'];
     $targetDir = $uploadDir.$fileName;
-    $Date = date('y-m-d');
+    $Date = date('Y-m-d');
     include '../connect.php';
     if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
       $sql = "INSERT INTO blogs(title,categoryId,description,Date,image) values ('$name','$category','$description','$Date','$fileName')";
@@ -94,7 +95,7 @@
       <div class="add-form">
         <h3 class="heading">Add Blog</h3>
         <div class="form-container">
-          <form action="<?php echo $_SERVER['php_self'] ?>" method="POST" onsubmit="return validateBlog()" enctype="multipart/form-data">
+          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="return validateBlog()" enctype="multipart/form-data">
             <div class="form-input">
               <label for="name">Blog Title</label>
               <input type="text" name="name" id="b-name" />
