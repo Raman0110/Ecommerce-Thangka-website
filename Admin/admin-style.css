@@ -185,7 +185,7 @@ ul {
   margin-bottom: 8px;
 }
 .form-input input,
-#b-description {
+.form-input textarea {
   width: 100%!important;
   padding: 8px;
   white-space: nowrap;

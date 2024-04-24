@@ -22,7 +22,7 @@ function validateCate() {
   }
 }
 
-function validateProduct() {
+function validateProduct(isAdd) {
   const productName = document.querySelector("#p-name");
   const size = document.querySelector("#size");
   const category = document.querySelector("#category");
@@ -58,22 +58,23 @@ function validateProduct() {
     isvalid = false;
     descriptionErr.innerHTML = "Enter product description";
   }
+  if(isAdd){
   if (image.value != "") {
     const imgType = image.files[0].type;
     if (!allowedTypes.includes(imgType)) {
       isvalid = false;
       imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
     }
-  }
-  else {
-    isvalid = false;
-    imageErr.innerHTML = "Upload product image";
-  }
+    else {
+      isvalid = false;
+      imageErr.innerHTML = "Upload product image";
+    }
+  }}
 
   return isvalid;
 }
 
-function validateBlog() {
+function validateBlog(isAdd){
   const blogName = document.querySelector('#b-name');
   const blogCategory = document.querySelector('#b-category');
   const blogDescription = document.querySelector('#b-description');
@@ -82,7 +83,7 @@ function validateBlog() {
   const bCategoryErr = document.querySelector('#b-category-error');
   const bDescriptionErr = document.querySelector('#b-description-error');
   const imageErr = document.querySelector('#b-image-error');
-  const allowedTypes = ['image/jpg', 'image/jpeg', 'image.png'];
+  const allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
   bNameErr.innerHTML = bCategoryErr.innerHTML = bDescriptionErr.innerHTML = imageErr.innerHTML = "";
   let isvalid = true;
   if (blogName.value == "") {
@@ -97,17 +98,17 @@ function validateBlog() {
     isvalid = false;
     bDescriptionErr.innerHTML = "Enter short description";
   }
-  if (bImage.value != "") {
-    const imgType = bImage.files[0].type;
-    if (!allowedTypes.includes(imgType)) {
+  if(isAdd){
+    if (bImage.value != "") {
+      const imgType = bImage.files[0].type;
+      if (!allowedTypes.includes(imgType)) {
+        isvalid = false;
+        imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
+      }
+    } else {
       isvalid = false;
-      imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
+      imageErr.innerHTML = "Upload a image";
     }
-  } else {
-    isvalid = false;
-    imageErr.innerHTML = "Upload a image";
-
   }
-
   return isvalid;
 }

@@ -12,6 +12,7 @@
 
 <body>
   <?php
+  $Msg = '';
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $productName = $_POST['p-name'];
     $size = $_POST['size'];

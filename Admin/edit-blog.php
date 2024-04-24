@@ -12,13 +12,14 @@
 
 <body>
     <?php
+    $Msg = '';
     include '../connect.php';
     $id = $_GET['id'];
-    $sql = "SELECT * FROM blogs WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_assoc($result);
+    $sql2 = "SELECT * FROM blogs WHERE id = $id";
+    $result2 = mysqli_query($conn, $sql2);
+    if ($result2) {
+        if (mysqli_num_rows($result2) > 0) {
+            $row = mysqli_fetch_assoc($result2);
         }
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,21 +29,31 @@
         $uploadDir = '../uploads/';
         $fileName = $_FILES['image']['name'];
         $targetDir = $uploadDir . $fileName;
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
-            $sql = "UPDATE blogs set title = $name, categoryId = $category, description = $description WHERE id = $id";
+        if (empty($fileName)) {
+            $sql = "UPDATE blogs SET title = '$name', categoryId = '$category', description = '$description' WHERE id = '$id'";
             $result = mysqli_query($conn, $sql);
             if ($result) {
-                $Msg = 'Blog edited successfully';
                 header('location:view-blog.php');
+                $Msg = 'Blog edited successfully';
             } else {
                 $Msg = 'Unable to edit blog';
             }
-        } else {
-            $Msg = 'Error uploading file';
+        } 
+        else {
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
+                $sql = "UPDATE blogs set title = '$name', categoryId = '$category', description = '$description', image = '$fileName' WHERE id = '$id'";
+                $result = mysqli_query($conn, $sql);
+                if ($result) {
+                    $Msg = 'Blog edited successfully';
+                    header('location:view-blog.php');
+                } else {
+                    $Msg = 'Unable to edit blog';
+                }
+            } else {
+                $Msg = 'Error uploading file';
+            }
         }
     }
-
-
     ?>
     <div class="layout-container">
         <aside class="sidebar">
@@ -101,10 +112,10 @@
             <div class="add-form">
                 <h3 class="heading">Edit Blog</h3>
                 <div class="form-container">
-                    <form action="<?php echo $_SERVER['php_self'] ?>" method="POST" onsubmit="return validateBlog()" enctype="multipart/form-data">
+                    <form action="<?php echo $_SERVER['php_self']?>" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
                         <div class="form-input">
                             <label for="name">Blog Title</label>
-                            <input type="text" name="name" id="b-name" value = "<?php echo $row['title']?>"/>
+                            <input type="text" name="name" id="b-name" value="<?php echo $row['title'] ?>" />
                             <p class="error" id="b-name-error"></p>
                         </div>
                         <div class="form-input">
@@ -115,15 +126,11 @@
                                 <?php
                                 include '../connect.php';
                                 $sql1 = 'SELECT * FROM blogCategories';
-                                $result = mysqli_query($conn, $sql1);
-                                if ($result) {
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row1 = mysqli_fetch_assoc($result)) {
-                                            if($row['categoryId']==$row1['id']){
-                                                echo "<option value = '" . $row1['id'] . "' selected>" . $row1['name'] . "</option>";
-                                            }else{
-                                                echo "<option value = '" . $row1['id'] . "'>" . $row1['name'] . "</option>";
-                                            }
+                                $result1 = mysqli_query($conn, $sql1);
+                                if ($result1) {
+                                    if (mysqli_num_rows($result1) > 0) {
+                                        while ($row1 = mysqli_fetch_assoc($result1)) {
+                                            echo "<option value='" . $row1['id'] . "' " . (($row['categoryId'] == $row1['id']) ? "selected" : "") . ">" . $row1['name'] . "</option>";
                                         }
                                     }
                                 }
@@ -133,12 +140,12 @@
                         </div>
                         <div class="form-input">
                             <label for="description">Description</label>
-                            <textarea name="description" id="b-description" rows="5"><?php echo $row['description']?></textarea>
+                            <textarea name="description" id="b-description" rows="5"><?php echo $row['description'] ?></textarea>
                             <p class="error" id="b-description-error"></p>
                         </div>
                         <div class="form-input">
                             <label for="image">Upload Image</label>
-                            <input type="file" name="image" id="b-image"/>
+                            <input type="file" name="image" id="b-image" />
                             <p class="error" id="b-image-error"></p>
                         </div>
                         <button type="submit" class="btn-submit" id="">Submit</button>

@@ -65,7 +65,7 @@
       </div>
       <h2>Welcome</h2>
       <div class="login-form forms-tab d-block" id="login-form">
-        <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateLogin()" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateLogin()" method="POST">
           <div class="flex">
             <i class="fa fa-user"></i><input type="text" name="username" id="l-username" placeholder="Username" />
           </div>
@@ -81,7 +81,7 @@
         </form>
       </div>
       <div class="register-form forms-tab" id="register-form">
-        <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateSignup()" method="POST">
+        <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateSignup()" method="POST">
           <div class="flex">
             <i class="fa fa-user"></i><input type="text" name="nusername" id="r-username" placeholder="Username" />
           </div>

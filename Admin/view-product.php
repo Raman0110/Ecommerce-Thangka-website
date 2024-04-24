@@ -90,7 +90,7 @@
                         <td>".$row['Dimensions']."</td>
                         <td>".$row['Date']."</td>
                         <td>
-                          <a href='add-product.php' class='btn-edit'>Edit</a>
+                          <a href='edit-product.php?id=".$row['ID']."' class='btn-edit'>Edit</a>
                           <a href='' class='btn-delete'>Delete</a>
                         </td>
                       </tr>
