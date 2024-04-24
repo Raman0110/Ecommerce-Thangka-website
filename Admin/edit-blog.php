@@ -21,11 +21,6 @@
             $row = mysqli_fetch_assoc($result);
         }
     }
-
-
-
-
-
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = $_POST['name'];
         $category = $_POST['category'];
