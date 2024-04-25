@@ -71,6 +71,7 @@
                 <th>Price</th>
                 <th>Size</th>
                 <th>Date</th>
+                <th>Category</th>
                 <th>Action</th>
               </tr>
               <?php 
@@ -81,6 +82,12 @@
                   if(mysqli_num_rows($result)>0){
                     $i = 1;
                     while($row=mysqli_fetch_assoc($result)){
+                      $cata = $row['Category_ID'];
+                      $sql2 = "SELECT * FROM categories WHERE ID = $cata";
+                      $result2 = mysqli_query($conn,$sql2);
+                      if($result2){
+                        $row2 = mysqli_fetch_assoc($result2);
+                      }
                       echo 
                       "
                       <tr>
@@ -89,9 +96,10 @@
                         <td>".$row['Price']."</td>
                         <td>".$row['Dimensions']."</td>
                         <td>".$row['Date']."</td>
+                        <td>".$row2['Name']."</td>
                         <td>
                           <a href='edit-product.php?id=".$row['ID']."' class='btn-edit'>Edit</a>
-                          <a href='' class='btn-delete'>Delete</a>
+                          <a href='delete-product.php?id=".$row['ID']."' class='btn-delete'>Delete</a>
                         </td>
                       </tr>
                         ";

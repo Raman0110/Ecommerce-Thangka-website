@@ -83,8 +83,8 @@
                     <td>".$i."</td>
                     <td>".$row['Name']."</td>
                     <td>
-                      <a href='add-product-category.php' class='btn-edit'>Edit</a>
-                      <a href='' class='btn-delete'>Delete</a>
+                      <a href='edit-product-category.php?id=".$row['ID']."' class='btn-edit'>Edit</a>
+                      <a href='delete-product-category.php?id=".$row['ID']."' class='btn-delete'>Delete</a>
                     </td>
                   </tr>";
                   $i++;

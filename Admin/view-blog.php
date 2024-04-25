@@ -86,7 +86,7 @@
                       <td>".$row['Date']."</td>
                       <td>
                         <a href='edit-blog.php?id=".$row['id']."' class='btn-edit'>Edit</a>
-                        <a href='' class='btn-delete'>Delete</a>
+                        <a href='delete-blog.php?id=".$row['id']."' class='btn-delete'>Delete</a>
                       </td>
                     </tr>";
                     $i++;

@@ -83,8 +83,8 @@
                 <td>".$i."</td>
                 <td>".$row['name']."</td>
                 <td>
-                  <a href='add-blog-category.php' class='btn-edit'>Edit</a>
-                  <a href='' class='btn-delete'>Delete</a>
+                  <a href='edit-blog-category.php?id=".$row['id']."' class='btn-edit'>Edit</a>
+                  <a href='delete-blog-category.php?id=".$row['id']."' class='btn-delete'>Delete</a>
                 </td>
               </tr>";
                 $i++;
@@ -92,6 +92,7 @@
             }else{
               echo 'No blog categories';
             }
+            echo $Msg;
           }else{
             echo mysqli_connect_error();
           }
