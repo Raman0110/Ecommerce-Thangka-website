@@ -38,8 +38,7 @@
             } else {
                 $Msg = 'Unable to edit blog';
             }
-        } 
-        else {
+        } else {
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
                 $sql = "UPDATE blogs set title = '$name', categoryId = '$category', description = '$description', image = '$fileName' WHERE id = '$id'";
                 $result = mysqli_query($conn, $sql);
@@ -112,7 +111,7 @@
             <div class="add-form">
                 <h3 class="heading">Edit Blog</h3>
                 <div class="form-container">
-                    <form action="<?php echo $_SERVER['php_self']?>" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
+                    <form action="<?php echo $_SERVER['php_self'] ?>" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
                         <div class="form-input">
                             <label for="name">Blog Title</label>
                             <input type="text" name="name" id="b-name" value="<?php echo $row['title'] ?>" />

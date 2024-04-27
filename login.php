@@ -27,7 +27,7 @@
         if($isAdmin){
           header('location:Admin/dashboard.php');
         }else{
-          header('location:index.html');
+          header('location:index.php');
         }
       } else {
         $userErr = 'Invalid username or passowrd';

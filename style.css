@@ -247,6 +247,7 @@ a{
     height: 300px;
 }
 .product-image img{
+    height: 100%;
     transition: all 0.5s ease-out;
     object-fit: cover;
     object-position: top;
@@ -277,6 +278,10 @@ a{
     top: 0;
     z-index: 1;
     transition: all 0.5s ease-in-out;
+    overflow-y: scroll;
+}
+.mobile-nav::-webkit-scrollbar{
+    display: none;
 }
 .mobile-nav ul{
     list-style-type: none;
@@ -311,10 +316,15 @@ a{
     transform: translateY(-15px);
 }
 .blog-card img{
+    object-fit: cover;
     border-radius: 10px;
+    height: 100%;
+}
+.blog-image{
+    height: 280px;
 }
 .blog-catagory{
-    display: inline;
+    display: inline-block;
     border: 1px solid var(--green);
     padding: 2px;
     margin-bottom: 8px;
