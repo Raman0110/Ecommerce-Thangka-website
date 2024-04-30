@@ -132,88 +132,59 @@
   </div>
 
   <!-- Product Section -->
-
-  <section class="product greenTara">
-    <div class="container">
-      <div class="flex">
-        <div class="section-heading">
-          <h2>Green Tara</h2>
-        </div>
-        <a href="" class="view-button">View all<i class="fa fa-angle-double-right"></i></a>
-      </div>
-      <div class="section-body flex justify-center">
-        <?php
-        include 'connect.php';
-        $sql = 'SELECT * FROM products LIMIT 4';
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo
-              "
-                <div class='product-card'>
-                      <div class='product-image'>
-                        <a href='product-single.php?id=" . $row['ID'] . "'>
-                          <img src='uploads/" . $row['Image_URL'] . "' alt='Unable to load image' class='w-100' />
-                        </a>
-                      </div>
-                      <div class='product-info'>
-                        <div class='flex'>
-                          <h4 class='product-name'><a href=''>" . $row['Title'] . "</a></h4>
-                          <p>" . $row['Dimensions'] . "</p>
-                        </div>
-                        <p>Rs " . $row['Price'] . "</p>
-                        <a href='product-single.php?id=" . $row['ID'] . "'>View Details</a>
-                      </div>
-                </div>";
-            }
+  <?php
+  include 'connect.php';
+  $featureQuery = "SELECT * FROM categories WHERE featured = 1";
+  $featureResult = mysqli_query($conn,$featureQuery);
+  echo $featureQuery;
+  if($featureResult){
+    while($newRow = mysqli_fetch_assoc($feaureResult)){
+      $catId = $newRow['ID'];
+      $sql = "SELECT * FROM products WHERE Category_ID = '$catId' LIMIT 4";
+      $result = mysqli_query($conn, $sql);
+    //   echo 
+    //   "
+    //   <section class='product greenTara'>
+    // <div class='container'>
+    //   <div class='flex'>
+    //     <div class='section-heading'>
+    //       <h2>Green Tara</h2>
+    //     </div>
+    //     <a href=' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
+    //   </div>
+    //   <div class='section-body flex justify-center'>";
+    //     if ($result) {
+    //       if (mysqli_num_rows($result) > 0) {
+    //         while ($row = mysqli_fetch_assoc($result)) {
+    //           echo
+    //           "
+    //             <div class='product-card'>
+    //                   <div class='product-image'>
+    //                     <a href='product-single.php?id=" . $row['ID'] . "'>
+    //                       <img src='uploads/" . $row['Image_URL'] . "' alt='Unable to load image' class='w-100' />
+    //                     </a>
+    //                   </div>
+    //                   <div class='product-info'>
+    //                     <div class='flex'>
+    //                       <h4 class='product-name'><a href=''>" . $row['Title'] . "</a></h4>
+    //                       <p>" . $row['Dimensions'] . "</p>
+    //                     </div>
+    //                     <p>Rs " . $row['Price'] . "</p>
+    //                     <a href='product-single.php?id=" . $row['ID'] . "'>View Details</a>
+    //                   </div>
+    //             </div>
+    //             ";
+    //         }
+    //       }
+    //     }
+    //         echo"
+    //         </div>
+    //         </div>
+    //         </section>
+    //         ";
           }
-        }
-        ?>
-      </div>
-    </div>
-  </section>
-
-  <section class="product buddha">
-    <div class="container">
-      <div class="flex">
-        <div class="section-heading">
-          <h2>Buddha</h2>
-        </div>
-        <a href="" class="view-button">View all<i class="fa fa-angle-double-right"></i></a>
-      </div>
-      <div class="section-body flex justify-center">
-        <?php
-        include 'connect.php';
-        $sql = "SELECT * FROM products LIMIT 4";
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo
-              "
-                <div class='product-card'>
-                      <div class='product-image'>
-                        <a href='product-single.php?id=" . $row['ID'] . "'>
-                          <img src='uploads/" . $row['Image_URL'] . "' alt='Unable to load image' class='w-100' />
-                        </a>
-                      </div>
-                      <div class='product-info'>
-                        <div class='flex'>
-                          <h4 class='product-name'><a href=''>" . $row['Title'] . "</a></h4>
-                          <p>" . $row['Dimensions'] . "</p>
-                        </div>
-                        <p>Rs " . $row['Price'] . "</p>
-                        <a href='product-single.php?id=" . $row['ID'] . "'>View Details</a>
-                      </div>
-                </div>";
-            }
-          }
-        }
-        ?>
-      </div>
-    </div>
-  </section>
+        };
+          ?>
   <section class="Blogs">
     <div class="container">
       <div class="section-heading">

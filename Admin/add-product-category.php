@@ -17,14 +17,17 @@
     if($_SERVER['REQUEST_METHOD']=="POST"){
       $categoryName = $_POST['category-name'];
       include '../connect.php';
-      $sql = "INSERT INTO categories(Name) values('$categoryName')";
+      if(isset($_POST['featured'])){
+        $sql = "INSERT INTO categories(Name,featured) values('$categoryName','1')";
+      }else{
+        $sql = "INSERT INTO categories(Name,featured) values('$categoryName','0')";
+      }
       $result = mysqli_query($conn,$sql);
       if($result){
         $Msg = "Category added successfully";
       }else{
         $Msg = "Somthing went wrong";
       }
-
     }
     ?>
     <div class="layout-container">
@@ -89,6 +92,8 @@
                 <label for="category-name">Category Name</label>
                 <input type="text" name="category-name" id="category-name" />
                 <p class="error" id="categoryErr"></p>
+                <input type="checkbox" name="featured" id="featured">
+                Is featured
               </div>
               <button type="submit" class="btn-submit">Submit</button>
               <p class="success"> <?php echo $Msg?></p>

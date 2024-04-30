@@ -30,8 +30,13 @@
 
     if($_SERVER['REQUEST_METHOD']=="POST"){
       $categoryName = $_POST['category-name'];
-      include '../connect.php';
-      $sql = "UPDATE categories SET Name = '$categoryName' WHERE ID = '$id'";
+      $sql = "";
+      $isFeatured = $_POST['featured'];
+      if($isFeatured==1){
+        $sql = "UPDATE categories SET Name = '$categoryName', featured = '1' WHERE ID = '$id'";
+      }else{
+        $sql = "UPDATE categories SET Name = '$categoryName', featured = '0' WHERE ID = '$id'";
+      }
       $result = mysqli_query($conn,$sql);
       if($result){
         header('location:view-product-category.php');
@@ -104,6 +109,8 @@
                 <label for="category-name">Category Name</label>
                 <input type="text" name="category-name" id="category-name" value = "<?php echo $row1['Name'] ?>"/>
                 <p class="error" id="categoryErr"></p>
+                <input type="checkbox" name="featured" id="featured" value = '1'>
+                Is featured
               </div>
               <button type="submit" class="btn-submit">Submit</button>
               <p class="success"> <?php echo $Msg?></p>

@@ -184,7 +184,7 @@ ul {
 .form-input {
   margin-bottom: 8px;
 }
-.form-input input,
+.form-input input:not([type='checkbox']),
 .form-input textarea {
   width: 100%!important;
   padding: 8px;
