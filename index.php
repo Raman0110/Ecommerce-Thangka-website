@@ -134,12 +134,12 @@
   <!-- Product Section -->
   <?php
   include 'connect.php';
-  $featureQuery = "SELECT * FROM categories WHERE featured = 1";
+  $featureQuery = "SELECT * FROM categories WHERE featured = 1 LIMIT 3";
   $featureResult = mysqli_query($conn,$featureQuery);
   if($featureResult){
     while($newRow = mysqli_fetch_assoc($featureResult)){
       $catId = $newRow['ID'];
-      $sql = "SELECT * FROM products WHERE Category_ID = $catId";
+      $sql = "SELECT * FROM products WHERE Category_ID = $catId LIMIT 4";
       $result = mysqli_query($conn, $sql);
       echo 
       "
