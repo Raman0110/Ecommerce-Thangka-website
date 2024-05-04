@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('../session.php');     ?>  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -58,8 +58,8 @@
       <main class="main-section">
         <div class="top-bar flex">
           <div class="icons">
-            <i class="fa fa-user fa-2x"></i>
-            <i class="fa fa-sign-out fa-2x"></i>
+            <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
+            <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
           </div>
         </div>
         <div class="view-list">
@@ -78,7 +78,7 @@
                 if(mysqli_num_rows($result)>0){
                   $i = 1;
                   while($row = mysqli_fetch_assoc($result)){
-                    echo 
+                    echo  
                     "<tr>
                     <td>".$i."</td>
                     <td>".$row['Name']."</td>

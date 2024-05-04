@@ -13,8 +13,10 @@
 </head>
 
 <body>
+  <?php
+  include 'connect.php';
+  ?>
   <header class="header">
-
     <div class="container">
       <div class="flex">
         <div class="logo">
@@ -28,15 +30,22 @@
             <li>
               <a href="">About</a>
             </li>
-            <li>
-              <a href="">Green Tara</a>
-            </li>
-            <li>
-              <a href="">Mandala</a>
-            </li>
-            <li>
-              <a href="">Buddha Life</a>
-            </li>
+            <?php
+            $navSql = "SELECT * FROM categories";
+            $navResult = mysqli_query($conn, $navSql);
+            if ($navResult) {
+              if (mysqli_num_rows($navResult) > 0) {
+                while ($navs = mysqli_fetch_assoc($navResult)) {
+                  echo
+                  "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                }
+              }
+            }
+            ?>
             <li>
               <a href="blog.php">Blog</a>
             </li>
@@ -62,18 +71,22 @@
               <li>
                 <a href="">About</a>
               </li>
-              <li>
-                <a href="">Green Tara</a>
-              </li>
-              <li>
-                <a href="">Manjushree</a>
-              </li>
-              <li>
-                <a href="">Buddha Life</a>
-              </li>
-              <li>
-                <a href="">Mandala</a>
-              </li>
+              <?php
+              $navSql = "SELECT * FROM categories";
+              $navResult = mysqli_query($conn, $navSql);
+              if ($navResult) {
+                if (mysqli_num_rows($navResult) > 0) {
+                  while ($navs = mysqli_fetch_assoc($navResult)) {
+                    echo
+                    "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                  }
+                }
+              }
+              ?>
               <li>
                 <a href="blog.php">Blog</a>
               </li>
@@ -133,30 +146,29 @@
 
   <!-- Product Section -->
   <?php
-  include 'connect.php';
   $featureQuery = "SELECT * FROM categories WHERE featured = 1 LIMIT 3";
-  $featureResult = mysqli_query($conn,$featureQuery);
-  if($featureResult){
-    while($newRow = mysqli_fetch_assoc($featureResult)){
+  $featureResult = mysqli_query($conn, $featureQuery);
+  if ($featureResult) {
+    while ($newRow = mysqli_fetch_assoc($featureResult)) {
       $catId = $newRow['ID'];
       $sql = "SELECT * FROM products WHERE Category_ID = $catId LIMIT 4";
       $result = mysqli_query($conn, $sql);
-      echo 
+      echo
       "
       <section class='product greenTara'>
     <div class='container'>
       <div class='flex'>
         <div class='section-heading'>
-          <h2>".$newRow['Name']."</h2>
+          <h2>" . $newRow['Name'] . "</h2>
         </div>
-        <a href=' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
+        <a href='product-category.php?id=$catId' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
       </div>
       <div class='section-body flex justify-center'>";
-        if ($result) {
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo
-              "
+      if ($result) {
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo
+            "
                 <div class='product-card'>
                       <div class='product-image'>
                         <a href='product-single.php?id=" . $row['ID'] . "'>
@@ -173,17 +185,17 @@
                       </div>
                 </div>
                 ";
-            }
           }
         }
-            echo"
+      }
+      echo "
             </div>
             </div>
             </section>
             ";
-          }
-        };
-          ?>
+    }
+  };
+  ?>
   <section class="Blogs">
     <div class="container">
       <div class="section-heading">

@@ -12,6 +12,7 @@
 
 <body>
   <?php
+  session_start();
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
     $registermsg = "";
@@ -25,6 +26,7 @@
         $row = mysqli_fetch_assoc($result);
         $isAdmin = $row['isadmin'];
         if($isAdmin){
+          $_SESSION['username'] = $userName;
           header('location:Admin/dashboard.php');
         }else{
           header('location:index.php');

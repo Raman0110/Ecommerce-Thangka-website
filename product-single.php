@@ -40,15 +40,22 @@
             <li>
               <a href="">About</a>
             </li>
-            <li>
-              <a href="">Green Tara</a>
-            </li>
-            <li>
-              <a href="">Mandala</a>
-            </li>
-            <li>
-              <a href="">Buddha Life</a>
-            </li>
+            <?php
+            $navSql = "SELECT * FROM categories";
+            $navResult = mysqli_query($conn, $navSql);
+            if ($navResult) {
+              if (mysqli_num_rows($navResult) > 0) {
+                while ($navs = mysqli_fetch_assoc($navResult)) {
+                  echo
+                  "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                }
+              }
+            }
+            ?>
             <li>
               <a href="blog.php">Blog</a>
             </li>

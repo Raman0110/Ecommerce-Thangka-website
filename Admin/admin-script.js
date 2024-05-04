@@ -58,23 +58,30 @@ function validateProduct(isAdd) {
     isvalid = false;
     descriptionErr.innerHTML = "Enter product description";
   }
-  if(isAdd){
-  if (image.value != "") {
-    const imgType = image.files[0].type;
-    if (!allowedTypes.includes(imgType)) {
-      isvalid = false;
-      imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
-    }
-    else {
+  if (isAdd) {
+    if (image.value != "") {
+      const imgType = image.files[0].type;
+      if (!allowedTypes.includes(imgType)) {
+        isvalid = false;
+        imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
+      }
+    }else {
       isvalid = false;
       imageErr.innerHTML = "Upload product image";
     }
-  }}
-
+  } else {
+    if (image.value != "") {
+      const imgType = image.files[0].type;
+      if (!allowedTypes.includes(imgType)) {
+        isvalid = false;
+        imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
+      }
+    }
+  }
   return isvalid;
 }
 
-function validateBlog(isAdd){
+function validateBlog(isAdd) {
   const blogName = document.querySelector('#b-name');
   const blogCategory = document.querySelector('#b-category');
   const blogDescription = document.querySelector('#b-description');
@@ -98,7 +105,7 @@ function validateBlog(isAdd){
     isvalid = false;
     bDescriptionErr.innerHTML = "Enter short description";
   }
-  if(isAdd){
+  if (isAdd) {
     if (bImage.value != "") {
       const imgType = bImage.files[0].type;
       if (!allowedTypes.includes(imgType)) {
@@ -109,6 +116,42 @@ function validateBlog(isAdd){
       isvalid = false;
       imageErr.innerHTML = "Upload a image";
     }
+  } else {
+    if (bImage.value != "") {
+      const imgType = bImage.files[0].type;
+      if (!allowedTypes.includes(imgType)) {
+        isvalid = false;
+        imageErr.innerHTML = "Image must be in .jpg, .jpeg or .png";
+      }
+    }
+  }
+  return isvalid;
+}
+
+function validateChangePw(){
+  const currentPw = document.querySelector('#current-pw');
+  const newPw = document.querySelector('#new-pw');
+  const confirmPw = document.querySelector('#confirm-pw');
+  let currentPwErr = document.querySelector('#current-pw-err'); 
+  let newPwErr = document.querySelector('#new-pw-err'); 
+  let confirmPwErr = document.querySelector('#confirm-pw-err');
+  currentPwErr.innerHTML=newPwErr.innerHTML=confirmPwErr.innerHTML = "";
+  let isvalid = true; 
+  if(currentPw.value==""){
+    isvalid = false;
+    currentPwErr.innerHTML = "Enter your current password";
+  }
+  if(newPw.value==""){
+    isvalid = false;
+    newPwErr.innerHTML = "Create new password";
+  }
+  if(confirmPw.value==""){
+    isvalid = false;
+    confirmPwErr.innerHTML = "Repeat your new password";
+  }
+  if(newPw.value!==confirmPw.value){
+    isvalid = false;
+    confirmPwErr.innerHTML = "Password didn't match";
   }
   return isvalid;
 }

@@ -39,22 +39,25 @@
               </li>
               <?php
               include 'connect.php';
+              $id = $_GET['id'];
               $navSql = "SELECT * FROM categories";
               $navResult = mysqli_query($conn, $navSql);
               if ($navResult) {
                 if (mysqli_num_rows($navResult) > 0) {
                   while ($navs = mysqli_fetch_assoc($navResult)) {
+                    $navId = $navs['ID'];
                     echo
                     "          
                     <li>
-                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                      <a href='product-category.php?id=" . $navId . "' class = ".(($id==$navId)?'active':'').">" . $navs['Name'] . "</a>
                     </li>
                     ";
                   }
                 }
               }
               ?>
-              <a href="blog.php" class="active">Blog</a>
+              <li>
+                <a href="blog.php">Blog</a>
               </li>
               <li>
                 <a href="">Contact</a>
@@ -78,18 +81,22 @@
                 <li>
                   <a href="">About</a>
                 </li>
-                <li>
-                  <a href="">Green Tara</a>
-                </li>
-                <li>
-                  <a href="">Manjushree</a>
-                </li>
-                <li>
-                  <a href="">Buddha Life</a>
-                </li>
-                <li>
-                  <a href="">Mandala</a>
-                </li>
+                <?php
+                $navSql = "SELECT * FROM categories";
+                $navResult = mysqli_query($conn, $navSql);
+                if ($navResult) {
+                  if (mysqli_num_rows($navResult) > 0) {
+                    while ($navs = mysqli_fetch_assoc($navResult)) {
+                      echo
+                      "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                    }
+                  }
+                }
+                ?>
                 <li>
                   <a href="">Contact</a>
                 </li>
@@ -102,79 +109,47 @@
     <section class="breadcrumb">
       <div class="container">
         <div class="breadcrumb-content flex">
-          <i class="fa fa-home"></i><a href="index.php">Home</a><i class="fa fa-angle-right"></i>Blog
-        </div>
-      </div>
-    </section>
-    <section class="Blogs">
-      <div class="container">
-        <div class="section-heading">
-          <h2>Blogs & News</h2>
-        </div>
-        <div class="section-body flex justify-center align-stretch">
+          <i class="fa fa-home"></i><a href="index.php">Home</a><i class="fa fa-angle-right"></i>Product<i class="fa fa-angle-right"></i>
           <?php
-          $sql = 'SELECT * FROM blogs';
-          $result = mysqli_query($conn, $sql);
-          if ($result) {
-            if (mysqli_num_rows($result) > 0) {
-              while ($row = mysqli_fetch_assoc($result)) {
-                $categories = $row['categoryId'];
-                $sql2 = "SELECT * FROM blogCategories WHERE id = $categories";
-                $result2 = mysqli_query($conn, $sql2);
-                if ($result2) {
-                  $row2 = mysqli_fetch_assoc($result2);
-                }
-                echo
-                "<div class='blog-card'>
-              <div class='blog-image'>
-                <a href='blog-single.php?id=" . $row['id'] . "'>
-                  <img src='uploads/" . $row['image'] . "' alt='' class='w-100'>
-                </a>
-              </div>
-              <div class='blog-info'>
-                <p class='blog-catagory'>" . $row2['name'] . "</p>
-                <h4>" . $row['title'] . "</h4>
-                <p>" . substr($row['description'], 0, 50) . "</p>
-                <a href='blog-single.php?id=" . $row['id'] . "'>Read More<i class='fa fa-angle-double-right fa-lg'></i></a>
-              </div>
-            </div>";
-              }
-            }
-          }
+          $sql = "SELECT * FROM categories WHERE ID = '$id' ";
+          $result = mysqli_query($conn,$sql);
+          $row = mysqli_fetch_assoc($result);
+          echo $row['Name'];
           ?>
         </div>
       </div>
     </section>
-    <section class="features">
-      <div class="container">
-        <div class="feature-section flex">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
-            </div>
-            <div class="feature-text">
-              <h4>Fast Shipping</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
-            </div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
-            </div>
-            <div class="feature-text">
-              <h4>Fast Shipping</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
-            </div>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">
-              <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
-            </div>
-            <div class="feature-text">
-              <h4>Fast Shipping</h4>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
-            </div>
-          </div>
+    <section class='product greenTara'>
+      <div class='container'>
+        <div class='section-body flex justify-center'>
+          <?php
+          $productSql = "SELECT * FROM products WHERE category_ID = '$id'";
+          $productResult = mysqli_query($conn, $productSql);
+          if ($productResult) {
+            if (mysqli_num_rows($productResult) > 0) {
+              while ($displayProduct = mysqli_fetch_assoc($productResult)) {
+                echo
+                "
+                <div class='product-card'>
+                      <div class='product-image'>
+                        <a href='product-single.php?id=" . $displayProduct['ID'] . "'>
+                          <img src='uploads/" . $displayProduct['Image_URL'] . "' alt='Unable to load image' class='w-100' />
+                        </a>
+                      </div>
+                      <div class='product-info'>
+                        <div class='flex'>
+                          <h4 class='product-name'><a href=''>" . $displayProduct['Title'] . "</a></h4>
+                          <p>" . $displayProduct['Dimensions'] . "</p>
+                        </div>
+                        <p>Rs " . $displayProduct['Price'] . "</p>
+                        <a href='product-single.php?id=" . $displayProduct['ID'] . "'>View Details</a>
+                      </div>
+                </div>
+                ";
+              }
+            }
+          }
+          ?>
         </div>
       </div>
     </section>

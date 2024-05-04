@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('../session.php');     ?>  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,11 +13,16 @@
   </head>
   <body>
     <?php
+    
     $Msg = '';
     if($_SERVER['REQUEST_METHOD']=='POST'){
       $name = $_POST['name'];
       include '../connect.php';
-      $sql = "INSERT INTO blogCategories(name) values ('$name')";
+      if(isset($_POST['featured'])){
+        $sql = "INSERT INTO blogCategories(name,featured) values ('$name','1')";
+      }else{
+        $sql = "INSERT INTO blogCategories(name) values ('$name')";
+      }
       $result = mysqli_query($conn,$sql);
       if($result){
         $Msg = 'Blog Category added successfully';
@@ -76,8 +81,8 @@
       <main class="main-section">
         <div class="top-bar flex">
           <div class="icons">
-            <i class="fa fa-user fa-2x"></i>
-            <i class="fa fa-sign-out fa-2x"></i>
+            <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
+            <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
           </div>
         </div>
         <div class="add-form">
@@ -88,6 +93,8 @@
                 <label for="category-name">Category Name</label>
                 <input type="text" name="name" id="category-name" />
                 <p class="error" id="categoryErr"></p>
+                <input type="checkbox" name="featured" id="featured" value = '1'>
+                Is featured
               </div>
               <button type="submit" class="btn-submit">Submit</button>
               <p class="success"> <?php echo $Msg?></p>
