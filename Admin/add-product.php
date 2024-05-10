@@ -1,4 +1,4 @@
-<?php require('../session.php');     ?>  <!DOCTYPE html>
+<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -22,7 +22,7 @@
     $price = $_POST['price'];
     $description = $_POST['description'];
     $uploadDir = '../uploads/';
-    $fileName = $_FILES['image']['name'];
+    $fileName = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION); 
     $targetDir = $uploadDir.$fileName;
     $date = date("Y-m-d");
     include '../connect.php';

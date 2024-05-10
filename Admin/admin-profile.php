@@ -1,4 +1,4 @@
-<?php require('../session.php'); ?>
+<?php require('../session.php'); issetUsername() ?>
 <!DOCTYPE html>
 <html lang="en">
 

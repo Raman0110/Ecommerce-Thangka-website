@@ -12,14 +12,19 @@
   <link rel="stylesheet" href="responsive.css">
 </head>
 
-<body>
+<body><?php
+  include 'connect.php';
+  require('session.php');
+  ?>
   <?php
   $id = $_GET['id'];
   include 'connect.php';
   $sql = "SELECT * FROM products WHERE ID = $id";
   $result = mysqli_query($conn, $sql);
-  if ($result) {
+  if (mysqli_num_rows($result)>0) {
     $row = mysqli_fetch_assoc($result);
+  }else{
+    header('location:error404.php');
   }
   ?>
 
@@ -100,6 +105,11 @@
           </div>
         </div>
       </div>
+    </div>
+  <div class="searchForm d-none">
+      <form action="search-item.php" method="GET">
+        <input type="text" placeholder="Search" id="searchBox" name="search">
+      </form>
     </div>
   </header>
   <section class="breadcrumb">

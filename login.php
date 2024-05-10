@@ -12,6 +12,10 @@
 
 <body>
   <?php
+  include 'connect.php';
+  require('session.php');
+  ?>
+  <?php
   session_start();
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
@@ -23,12 +27,14 @@
       $sql = "SELECT * FROM users where username = '$userName' and password = '$password'";
       $result = mysqli_query($conn, $sql);
       if (mysqli_num_rows($result) > 0) {
+        $_SESSION['username'] = $userName;
         $row = mysqli_fetch_assoc($result);
         $isAdmin = $row['isadmin'];
         if($isAdmin){
-          $_SESSION['username'] = $userName;
+          $_SESSION['isAdmin'] = true;
           header('location:Admin/dashboard.php');
         }else{
+          $_SESSION['isAdmin'] = false;
           header('location:index.php');
         }
       } else {
@@ -39,6 +45,12 @@
       $phone = $_POST['phone'];
       $email = $_POST['email'];
       $password = $_POST['npassword'];
+      $getUsername = "SELECT * FROM users WHERE username = '$userName'";
+      $resultUsername = mysqli_query($conn,$getUsername);
+      if(mysqli_num_rows($resultUsername)>0){
+        $registermsg = "Username already taken";
+      }
+      else{
       $sql = "INSERT INTO users(username,phone,email,password) values('$userName','$phone','$email','$password')";
       $result = mysqli_query($conn, $sql);
       if ($result) {
@@ -46,12 +58,9 @@
       }else{
         $registermsg = "User account creation failed";
       }
+      }
     }
   }
-
-
-
-
   ?>
   <div class="form-container">
     <div>

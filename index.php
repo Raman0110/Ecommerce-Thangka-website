@@ -15,6 +15,7 @@
 <body>
   <?php
   include 'connect.php';
+  require('session.php');
   ?>
   <header class="header">
     <div class="container">
@@ -55,8 +56,21 @@
           </ul>
         </nav>
         <div class="icons">
-          <a href=""><i class="fa fa-user-circle fa-2x icon" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-search fa-2x icon" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
+          <?php
+          if(isset($_SESSION['username'])){
+            echo 
+            "
+            <a href='user-profile.php'><i class='fa fa-user-circle fa-2x icon' aria-hidden='true'></i></a>
+            <a href = 'logout.php'><i class='fa fa-sign-out fa-2x icon'></i></a>
+            ";
+          }else{
+            echo 
+            "
+            <a href='login.php' class='login-btn'>Login</a>
+            ";
+          }
+          ?>
           <i class="fa fa-bars fa-2x icon" id="bars" aria-hidden="true"></i>
         </div>
         <div class="mobile-nav">
@@ -93,11 +107,15 @@
               <li>
                 <a href="">Contact</a>
               </li>
-
             </ul>
           </div>
         </div>
       </div>
+    </div>
+  <div class="searchForm d-none">
+      <form action="search-item.php" method="GET">
+        <input type="text" placeholder="Search" id="searchBox" name="search">
+      </form>
     </div>
   </header>
   <div class="banner">

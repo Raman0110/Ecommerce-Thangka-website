@@ -1,6 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['username'])){
-  header('location:/ecommerce/login.php');
+function issetUsername(){
+  if(!isset($_SESSION['username']) || $_SESSION['isAdmin']!=true){
+    header('location:/ecommerce/login.php');
+  }
 }
 ?>

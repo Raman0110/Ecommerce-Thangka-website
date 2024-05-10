@@ -21,6 +21,9 @@
   .footer-section{
     width: 32%;
   }
+  .form-box{
+    width: 45vw;
+  }
 }
 
 @media (min-width: 992px) {

@@ -1,4 +1,4 @@
-<?php require('../session.php');     ?>  <!DOCTYPE html>
+<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,9 +28,8 @@
     $description = $_POST['description'];
     $uploadDir = '../uploads/';
     $fileName = $_FILES['image']['name'];
-    $targetDir = $uploadDir.$fileName;
     if(empty($fileName)){
-        $sql2 = "UPDATE products SET Title = '$productName',Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size' WHERE ID = $id ";
+      $sql2 = "UPDATE products SET Title = '$productName',Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size' WHERE ID = $id ";
       $result2  = mysqli_query($conn, $sql2);
         if ($result2) {
             header('location:view-product.php');
@@ -38,9 +37,11 @@
         }else{
             $Msg = 'Unable to edit post';
         }
-    }else{
+      }else{
+        $newFile = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+        $targetDir = $uploadDir.$newFile;
         if(move_uploaded_file($_FILES['image']['tmp_name'],$targetDir)){
-            $sql2 = "UPDATE products SET Title = '$productName', Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size', Image_URL = '$fileName' WHERE ID = $id ";
+            $sql2 = "UPDATE products SET Title = '$productName', Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size', Image_URL = '$newFile' WHERE ID = $id ";
             $result2  = mysqli_query($conn, $sql2);
             if ($result2) {
                 $Msg = 'Product Edited successfully';

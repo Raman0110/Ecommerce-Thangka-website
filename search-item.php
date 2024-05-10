@@ -1,4 +1,3 @@
-
   <!DOCTYPE html>
   <html lang="en">
 
@@ -6,18 +5,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Product</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="responsive.css" />
   </head>
 
-  <body>
-    <?php
-    require('session.php');
-    
-    ?>
+  <body><?php
+  include 'connect.php';
+  require('session.php');
+  ?>
     <header class="header">
       <div class="container">
         <div class="flex">
@@ -41,7 +39,6 @@
                 if (mysqli_num_rows($navResult) > 0) {
                   while ($navs = mysqli_fetch_assoc($navResult)) {
                     $navId = $navs['ID'];
-                    
                     echo
                     "          
                     <li>
@@ -60,7 +57,7 @@
               </li>
             </ul>
           </nav>
-                  <div class="icons">
+          <div class="icons">
           <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
           <?php
           if(isset($_SESSION['username'])){
@@ -123,18 +120,7 @@
     <section class="breadcrumb">
       <div class="container">
         <div class="breadcrumb-content flex">
-          <i class="fa fa-home"></i><a href="index.php">Home</a><i class="fa fa-angle-right"></i>Product<i class="fa fa-angle-right"></i>
-          <?php
-          $sql = "SELECT * FROM categories WHERE ID = '$id' ";
-          $result = mysqli_query($conn,$sql);
-          if(mysqli_num_rows($result)>0){
-            $row = mysqli_fetch_assoc($result);
-            echo $row['Name'];
-          }
-          else{
-            header('location:error404.php');
-          }
-          ?>
+          <i class="fa fa-home"></i><a href="index.php">Home</a><i class="fa fa-angle-right"></i>Product
         </div>
       </div>
     </section>
@@ -142,11 +128,12 @@
       <div class='container'>
         <div class='section-body flex justify-center'>
           <?php
-          $productSql = "SELECT * FROM products WHERE category_ID = '$id'";
-          $productResult = mysqli_query($conn, $productSql);
-          if ($productResult) {
-            if (mysqli_num_rows($productResult) > 0) {
-              while ($displayProduct = mysqli_fetch_assoc($productResult)) {
+          $searchProduct = $_GET['search'];
+          $searchSql = "SELECT * FROM products WHERE Title like '%$searchProduct%'";
+          $searchResult = mysqli_query($conn, $searchSql);
+          if ($searchResult) {
+            if (mysqli_num_rows($searchResult) > 0) {
+              while ($displayProduct = mysqli_fetch_assoc($searchResult)) {
                 echo
                 "
                 <div class='product-card'>
@@ -166,6 +153,11 @@
                 </div>
                 ";
               }
+            }else{
+              echo 
+              "
+              <h4>Sorry no matching items found</h4>
+              ";
             }
           }
           ?>
