@@ -180,7 +180,7 @@
         <div class='section-heading'>
           <h2>" . $newRow['Name'] . "</h2>
         </div>
-        <a href=' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
+        <a href='product-category.php?id=$catId' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
       </div>
       <div class='section-body flex justify-center'>";
       if ($result) {
@@ -196,7 +196,7 @@
                       </div>
                       <div class='product-info'>
                         <div class='flex'>
-                          <h4 class='product-name'><a href=''>" . $row['Title'] . "</a></h4>
+                          <h4 class='product-name'><a href='product-single.php?id=" . $row['ID'] . "'>" . $row['Title'] . "</a></h4>
                           <p>" . $row['Dimensions'] . "</p>
                         </div>
                         <p>Rs " . $row['Price'] . "</p>

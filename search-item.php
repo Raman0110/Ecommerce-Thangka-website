@@ -31,20 +31,17 @@
                 <a href="aboutus.php">About</a>
               </li>
               <?php
-              include 'connect.php';
-              $id = $_GET['id'];
               $navSql = "SELECT * FROM categories";
               $navResult = mysqli_query($conn, $navSql);
               if ($navResult) {
                 if (mysqli_num_rows($navResult) > 0) {
                   while ($navs = mysqli_fetch_assoc($navResult)) {
-                    $navId = $navs['ID'];
                     echo
                     "          
-                    <li>
-                      <a href='product-category.php?id=" . $navId . "' class = ".(($id==$navId)?'active':'').">" . $navs['Name'] . "</a>
-                    </li>
-                    ";
+                      <li>
+                        <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                      </li>
+                      ";
                   }
                 }
               }

@@ -37,6 +37,15 @@
           </li>
           <li class="dropdown">
             <div class=" flex justify-between">
+              Users<i class="fa fa-angle-down fa-1x"></i>
+            </div>
+            <ul class="dropdown-menu d-none">
+              <li><a href="view-product-category.php">View Users</a></li>
+              <li><a href="add-product-category.php">Add Users</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <div class=" flex justify-between">
               Blog <i class="fa fa-angle-down fa-1x"></i>
             </div>
             <ul class="dropdown-menu d-none">
@@ -68,12 +77,13 @@
               <tr>
                 <th>S.N</th>
                 <th>Name</th>
+                <th>Category</th>
                 <th>Date</th>
                 <th>Action</th>
               </tr>
               <?php
                 include '../connect.php';
-                $sql = 'SELECT * FROM blogs';
+                $sql = "SELECT b.*,c.name as cata FROM blogs b INNER JOIN blogcategories c on c.id = b.categoryId";
                 $result = mysqli_query($conn,$sql);
                 if($result){
                   if(mysqli_num_rows($result)>0){
@@ -83,6 +93,7 @@
                       "<tr>
                       <td>".$i."</td>
                       <td>".$row['title']."</td>
+                      <td>".$row['cata']."</td>
                       <td>".$row['Date']."</td>
                       <td>
                         <a href='edit-blog.php?id=".$row['id']."' class='btn-edit'>Edit</a>
@@ -92,7 +103,7 @@
                     $i++;
                     }
                   }else{
-                    echo "No data found";
+                    echo "<td colspan='4'>No data found</td>";
                   }
                 }else{
                   echo mysqli_connect_error();

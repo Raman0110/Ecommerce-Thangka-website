@@ -140,7 +140,7 @@
         <div class="main-product">
           <img src='<?php echo "uploads/" . $row['image'] . "" ?>' alt="">
           <p class="category"><?php echo $row2['name'] ?></p>
-          <h2><?php echo $row['Title'] ?></h2>
+          <h2><?php echo $row['title'] ?></h2>
           <p><?php echo $row['description'] ?></p>
         </div>
         <div class="related-product">

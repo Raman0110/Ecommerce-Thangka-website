@@ -43,6 +43,15 @@
             <li><a href="view-product-category.php">View Product Category</a></li>
             <li><a href="add-product-category.php">Add Product Category</a></li>
           </ul>
+        </li>
+        <li>
+        <div class=" flex justify-between">
+            Users<i class="fa fa-angle-down fa-1x"></i>
+          </div>
+          <ul class="dropdown-menu d-none">
+            <li><a href="view-user.php">View Users</a></li>
+            <li><a href="add-user.php">Add User</a></li>
+          </ul>
         </li></li>Users</li>
         <li class="dropdown">
           <div class=" flex justify-between">

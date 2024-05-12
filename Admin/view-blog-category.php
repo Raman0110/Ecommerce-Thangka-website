@@ -34,7 +34,16 @@
             <li><a href="view-product-category.php">View Product Category</a></li>
             <li><a href="add-product-category.php">Add Product Category</a></li>
           </ul>
-        </li></li>Users</li>
+        </li>
+        <li class="dropdown">
+          <div class=" flex justify-between">
+            Users<i class="fa fa-angle-down fa-1x"></i>
+          </div>
+          <ul class="dropdown-menu d-none">
+            <li><a href="view-user.php">View Users</a></li>
+            <li><a href="add-user.php">Add User</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <div class=" flex justify-between">
             Blog <i class="fa fa-angle-down fa-1x"></i>
@@ -71,6 +80,7 @@
             <th>Action</th>
           </tr>
           <?php
+          $Msg="";
           include '../connect.php';
           $sql = 'SELECT * FROM blogCategories';
           $result = mysqli_query($conn, $sql);
@@ -90,7 +100,7 @@
                 $i++;
               }
             }else{
-              echo 'No blog categories';
+              echo "<td colspan='3'>No data found</td>";
             }
             echo $Msg;
           }else{

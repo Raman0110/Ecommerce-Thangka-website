@@ -16,10 +16,9 @@
   require('session.php');
   ?>
   <?php
-  session_start();
+    $registermsg = $msg=$userErr="";
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
-    $registermsg = "";
     if (isset($_POST['login'])) {
       $userName = $_POST['username'];
       $password = $_POST['password'];
@@ -64,7 +63,7 @@
   ?>
   <div class="form-container">
     <div>
-      <?php echo $registermsg?>
+
     <div class="form-box">
       <div class="option-btn">
         <button class="tab-btn btn active-btn" data-target="#login-form">
@@ -118,6 +117,7 @@
           </button>
         </form>
       </div>
+      <?php echo $registermsg;?>
     </div>
   </div>
   </div>

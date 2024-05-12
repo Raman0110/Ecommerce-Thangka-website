@@ -26,3 +26,11 @@ CREATE TABLE blogs(
     Date DATE,
     image varchar(255)
 );
+CREATE TABLE users(
+    userid INT AUTO_INCREMENT PRIMARY KEY,
+    username varchar(30),
+    phone bigint(10),
+    email varchar(50),
+    password varchar(50),
+    isadmin tinyint(1)
+);

@@ -157,7 +157,7 @@
                       </div>
                       <div class='product-info'>
                         <div class='flex'>
-                          <h4 class='product-name'><a href=''>" . $displayProduct['Title'] . "</a></h4>
+                          <h4 class='product-name'><a href='product-single.php?id=" . $displayProduct['ID'] . "'>" . $displayProduct['Title'] . "</a></h4>
                           <p>" . $displayProduct['Dimensions'] . "</p>
                         </div>
                         <p>Rs " . $displayProduct['Price'] . "</p>

@@ -19,7 +19,10 @@
   <?php
   $id = $_GET['id'];
   include 'connect.php';
-  $sql = "SELECT * FROM products WHERE ID = $id";
+  $sql = "SELECT p.*, c.Name AS cata 
+  FROM products p 
+  INNER JOIN categories c ON c.ID = p.Category_ID 
+  WHERE p.ID = $id;";
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result)>0) {
     $row = mysqli_fetch_assoc($result);
@@ -27,9 +30,6 @@
     header('location:error404.php');
   }
   ?>
-
-
-
 
   <header class="header">
     <div class="container">
@@ -124,6 +124,7 @@
       <div class="main-content flex">
         <div class="main-product">
           <img src='<?php echo "uploads/" . $row['Image_URL'] . "" ?>' alt="">
+          <p class="category"><?php echo $row['cata']?></p>
           <h2><?php echo $row['Title']?></h2>
           <p><?php echo $row['Description']?></p>
           <p>Price: <?php echo $row['Price']?></p>

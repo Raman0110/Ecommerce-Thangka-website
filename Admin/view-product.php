@@ -36,7 +36,15 @@ issetUsername()     ?>
             <li><a href="add-product-category.php">Add Product Category</a></li>
           </ul>
         </li>
-        </li>Users</li>
+        <li class="dropdown">
+          <div class=" flex justify-between">
+            Users<i class="fa fa-angle-down fa-1x"></i>
+          </div>
+          <ul class="dropdown-menu d-none">
+            <li><a href="view-user.php">View Users</a></li>
+            <li><a href="add-user.php">Add User</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <div class=" flex justify-between">
             Blog <i class="fa fa-angle-down fa-1x"></i>
@@ -78,18 +86,12 @@ issetUsername()     ?>
           </tr>
           <?php
           include '../connect.php';
-          $sql = 'SELECT * FROM products';
+          $sql = 'SELECT p.*,c.Name as cata FROM products p INNER JOIN categories c on c.ID = p.Category_ID';
           $result = mysqli_query($conn, $sql);
           if ($result) {
             if (mysqli_num_rows($result) > 0) {
               $i = 1;
               while ($row = mysqli_fetch_assoc($result)) {
-                $cata = $row['Category_ID'];
-                $sql2 = "SELECT * FROM categories WHERE ID = $cata";
-                $result2 = mysqli_query($conn, $sql2);
-                if ($result2) {
-                  $row2 = mysqli_fetch_assoc($result2);
-                }
                 echo
                 "
                       <tr>
@@ -98,7 +100,7 @@ issetUsername()     ?>
                         <td>" . $row['Price'] . "</td>
                         <td>" . $row['Dimensions'] . "</td>
                         <td>" . $row['Date'] . "</td>
-                        <td>" . $row2['Name'] . "</td>
+                        <td>" . $row['cata'] . "</td>
                         <td>
                           <a href='edit-product.php?id=" . $row['ID'] . "' class='btn-edit'>Edit</a>
                           <a href='delete-product.php?id=" . $row['ID'] . "' class='btn-delete'>Delete</a>
@@ -108,7 +110,7 @@ issetUsername()     ?>
                 $i++;
               }
             } else {
-              echo 'No data found';
+              echo "<td colspan='7'>No data found</td>";
             }
           } else {
             echo mysqli_connect_error();

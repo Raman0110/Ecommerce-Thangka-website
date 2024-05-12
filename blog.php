@@ -47,6 +47,7 @@
               }
             }
             ?>
+            <li>
             <a href="blog.php" class="active">Blog</a>
             </li>
             <li>

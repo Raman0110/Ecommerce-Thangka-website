@@ -496,7 +496,7 @@ footer {
 }
 
 .main-product h2 {
-    margin-top: 1rem;
+    margin-top: .2rem;
 }
 
 .main-product img {
@@ -507,10 +507,11 @@ footer {
 }
 
 .category {
-    display: inline;
+    display: inline-block;
     background-color: var(--green);
-    padding: 3px;
+    padding: 3px 8px;
     color: white;
+    border-radius: 1.5rem;
 }
 
 .related-product {

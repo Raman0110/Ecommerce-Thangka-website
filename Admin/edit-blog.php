@@ -83,6 +83,15 @@
                     </ul>
                 </li>
                 <li class="dropdown">
+        <div class=" flex justify-between">
+            Users<i class="fa fa-angle-down fa-1x"></i>
+          </div>
+          <ul class="dropdown-menu d-none">
+            <li><a href="view-user.php">View Users</a></li>
+            <li><a href="add-user.php">Add User</a></li>
+          </ul>
+        </li>
+                <li class="dropdown">
                     <div class="flex justify-between">
                         Blog <i class="fa fa-angle-down fa-1x"></i>
                     </div>
@@ -112,7 +121,7 @@
             <div class="add-form">
                 <h3 class="heading">Edit Blog</h3>
                 <div class="form-container">
-                    <form action="<?php echo $_SERVER['php_self'] ?>" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
                         <div class="form-input">
                             <label for="name">Blog Title</label>
                             <input type="text" name="name" id="b-name" value="<?php echo $row['title'] ?>" />

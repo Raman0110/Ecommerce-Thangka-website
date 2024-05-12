@@ -81,6 +81,15 @@
           </ul>
         </li>
         <li class="dropdown">
+        <div class=" flex justify-between">
+            Users<i class="fa fa-angle-down fa-1x"></i>
+          </div>
+          <ul class="dropdown-menu d-none">
+            <li><a href="view-user.php">View Users</a></li>
+            <li><a href="add-user.php">Add User</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
           <div class="flex justify-between">
             Blog <i class="fa fa-angle-down fa-1x"></i>
           </div>
@@ -110,7 +119,7 @@
       <div class="add-form">
         <h3 class="heading">Edit Product</h3>
         <div class="form-container">
-          <form action="<?php echo $_SERVER['php_self'] ?>" onsubmit="return validateProduct(false)" method="POST" enctype="multipart/form-data">
+          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateProduct(false)" method="POST" enctype="multipart/form-data">
             <div class="form-input">
               <label for="p-name">Product Name</label>
               <input type="text" name="p-name" id="p-name" value = "<?php echo $row['Title']?>"/>
@@ -127,7 +136,6 @@
               <select name="category" id="category">
                 <option value="">Select a category</option>
                 <?php
-                include '../connect.php';
                 $sql1 = 'SELECT * FROM categories';
                 $result1 = mysqli_query($conn, $sql1);
                 if (mysqli_num_rows($result1) > 0) {
