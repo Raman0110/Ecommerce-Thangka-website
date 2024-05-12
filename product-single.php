@@ -12,14 +12,19 @@
   <link rel="stylesheet" href="responsive.css">
 </head>
 
-<body>
+<body><?php
+  include 'connect.php';
+  require('session.php');
+  ?>
   <?php
   $id = $_GET['id'];
   include 'connect.php';
   $sql = "SELECT * FROM products WHERE ID = $id";
   $result = mysqli_query($conn, $sql);
-  if ($result) {
+  if (mysqli_num_rows($result)>0) {
     $row = mysqli_fetch_assoc($result);
+  }else{
+    header('location:error404.php');
   }
   ?>
 
@@ -38,22 +43,29 @@
               <a href="index.php">Home</a>
             </li>
             <li>
-              <a href="">About</a>
+              <a href="aboutus.php">About</a>
             </li>
-            <li>
-              <a href="">Green Tara</a>
-            </li>
-            <li>
-              <a href="">Mandala</a>
-            </li>
-            <li>
-              <a href="">Buddha Life</a>
-            </li>
+            <?php
+            $navSql = "SELECT * FROM categories";
+            $navResult = mysqli_query($conn, $navSql);
+            if ($navResult) {
+              if (mysqli_num_rows($navResult) > 0) {
+                while ($navs = mysqli_fetch_assoc($navResult)) {
+                  echo
+                  "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                }
+              }
+            }
+            ?>
             <li>
               <a href="blog.php">Blog</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="contactus.php">Contact</a>
             </li>
           </ul>
         </nav>
@@ -72,7 +84,7 @@
                 <a href="" class="active">Home</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="aboutus.php">About</a>
               </li>
               <li>
                 <a href="">Green Tara</a>
@@ -87,12 +99,17 @@
                 <a href="">Mandala</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="contactus.php">Contact</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
+    </div>
+  <div class="searchForm d-none">
+      <form action="search-item.php" method="GET">
+        <input type="text" placeholder="Search" id="searchBox" name="search">
+      </form>
     </div>
   </header>
   <section class="breadcrumb">

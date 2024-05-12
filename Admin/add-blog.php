@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,6 +12,8 @@
 
 <body>
   <?php
+  
+  
   $Msg = '';
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -19,7 +21,7 @@
     $category = $_POST['category'];
     $description = $_POST['description'];
     $uploadDir = '../uploads/';
-    $fileName = $_FILES['image']['name'];
+    $fileName = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
     $targetDir = $uploadDir.$fileName;
     $Date = date('Y-m-d');
     include '../connect.php';
@@ -88,8 +90,8 @@
     <main class="main-section">
       <div class="top-bar flex">
         <div class="icons">
-          <i class="fa fa-user fa-2x"></i>
-          <i class="fa fa-sign-out fa-2x"></i>
+          <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
+          <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
         </div>
       </div>
       <div class="add-form">

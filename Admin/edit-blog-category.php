@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -26,7 +26,11 @@
     if($_SERVER['REQUEST_METHOD']=='POST'){
       $name = $_POST['name'];
       include '../connect.php';
-      $sql = "UPDATE blogCategories SET name = '$name' WHERE id = '$id'";
+      if(isset($_POST['featured'])){
+        $sql = "UPDATE blogCategories SET name = '$name', featured = '1' WHERE id = '$id'";
+      }else{
+        $sql = "UPDATE blogCategories SET name = '$name' WHERE id = '$id'";
+      }
       $result = mysqli_query($conn,$sql);
       if($result){
         header('location:view-blog-category.php');
@@ -86,8 +90,8 @@
       <main class="main-section">
         <div class="top-bar flex">
           <div class="icons">
-            <i class="fa fa-user fa-2x"></i>
-            <i class="fa fa-sign-out fa-2x"></i>
+            <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
+            <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
           </div>
         </div>
         <div class="add-form">
@@ -101,6 +105,8 @@
               </div>
               <button type="submit" class="btn-submit">Submit</button>
               <p class="success"> <?php echo $Msg?></p>
+              <input type="checkbox" name="featured" id="featured" value ="1">
+              Is featured
             </form>
           </div>
         </div>

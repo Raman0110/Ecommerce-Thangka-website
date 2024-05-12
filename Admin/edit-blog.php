@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -28,7 +28,6 @@
         $description = $_POST['description'];
         $uploadDir = '../uploads/';
         $fileName = $_FILES['image']['name'];
-        $targetDir = $uploadDir . $fileName;
         if (empty($fileName)) {
             $sql = "UPDATE blogs SET title = '$name', categoryId = '$category', description = '$description' WHERE id = '$id'";
             $result = mysqli_query($conn, $sql);
@@ -39,8 +38,10 @@
                 $Msg = 'Unable to edit blog';
             }
         } else {
+            $newFile = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+            $targetDir = $uploadDir . $newFile;
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
-                $sql = "UPDATE blogs set title = '$name', categoryId = '$category', description = '$description', image = '$fileName' WHERE id = '$id'";
+                $sql = "UPDATE blogs set title = '$name', categoryId = '$category', description = '$description', image = '$newFile' WHERE id = '$id'";
                 $result = mysqli_query($conn, $sql);
                 if ($result) {
                     $Msg = 'Blog edited successfully';
@@ -104,8 +105,8 @@
         <main class="main-section">
             <div class="top-bar flex">
                 <div class="icons">
-                    <i class="fa fa-user fa-2x"></i>
-                    <i class="fa fa-sign-out fa-2x"></i>
+                    <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
+                    <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
                 </div>
             </div>
             <div class="add-form">

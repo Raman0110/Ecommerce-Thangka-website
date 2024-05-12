@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,7 +34,7 @@
             <li><a href="view-product-category.php">View Product Category</a></li>
             <li><a href="add-product-category.php">Add Product Category</a></li>
           </ul>
-        </li>
+        </li></li>Users</li>
         <li class="dropdown">
           <div class=" flex justify-between">
             Blog <i class="fa fa-angle-down fa-1x"></i>
@@ -58,8 +58,8 @@
     <main class="main-section">
       <div class="top-bar flex">
         <div class="icons">
-          <i class="fa fa-user fa-2x"></i>
-          <i class="fa fa-sign-out fa-2x"></i>
+          <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
+          <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
         </div>
       </div>
       <div class="view-list">

@@ -14,16 +14,21 @@
 
 <body>
   <?php
+  require('session.php');
+  ?>
+  <?php
   include 'connect.php';
   $id = $_GET['id'];
   $sql = "SELECT * FROM blogs WHERE id = $id";
-  $result = mysqli_query($conn,$sql);
-  if($result){
+  $result = mysqli_query($conn, $sql);
+  if (mysqli_num_rows($result)>0) {
     $row = mysqli_fetch_assoc($result);
+  }else{
+    header('location:error404.php');
   }
-  $sql2 = "SELECT * FROM blogCategories WHERE id = ".$row['categoryId']."";
-  $result2 = mysqli_query($conn,$sql2);
-  if($result2){
+  $sql2 = "SELECT * FROM blogCategories WHERE id = " . $row['categoryId'] . "";
+  $result2 = mysqli_query($conn, $sql2);
+  if ($result2) {
     $row2 = mysqli_fetch_assoc($result2);
   }
 
@@ -40,28 +45,48 @@
               <a href="index.php">Home</a>
             </li>
             <li>
-              <a href="">About</a>
+              <a href="aboutus.php">About</a>
             </li>
-            <li>
-              <a href="">Green Tara</a>
-            </li>
-            <li>
-              <a href="">Mandala</a>
-            </li>
-            <li>
-              <a href="">Buddha Life</a>
-            </li>
+            <?php
+            $navSql = "SELECT * FROM categories";
+            $navResult = mysqli_query($conn, $navSql);
+            if ($navResult) {
+              if (mysqli_num_rows($navResult) > 0) {
+                while ($navs = mysqli_fetch_assoc($navResult)) {
+                  echo
+                  "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                }
+              }
+            }
+            ?>
             <li>
               <a href="blog.php">Blog</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="contactus.php">Contact</a>
             </li>
           </ul>
         </nav>
         <div class="icons">
-          <a href=""><i class="fa fa-user-circle fa-2x icon" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-search fa-2x icon" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
+          <?php
+          if (isset($_SESSION['username'])) {
+            echo
+            "
+            <a href='user-profile.php'><i class='fa fa-user-circle fa-2x icon' aria-hidden='true'></i></a>
+            <a href = 'logout.php'><i class='fa fa-sign-out fa-2x icon'></i></a>
+            ";
+          } else {
+            echo
+            "
+            <a href='login.php' class='login-btn'>Login</a>
+            ";
+          }
+          ?>
           <i class="fa fa-bars fa-2x icon" id="bars" aria-hidden="true"></i>
         </div>
         <div class="mobile-nav">
@@ -74,7 +99,7 @@
                 <a href="" class="active">Home</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="aboutus.php">About</a>
               </li>
               <li>
                 <a href="">Green Tara</a>
@@ -89,12 +114,17 @@
                 <a href="">Mandala</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="contactus.php">Contact</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
+    </div>
+    <div class="searchForm d-none">
+      <form action="search-item.php" method="GET">
+        <input type="text" placeholder="Search" id="searchBox" name="search">
+      </form>
     </div>
   </header>
   <section class="breadcrumb">
@@ -108,10 +138,10 @@
     <div class="container">
       <div class="main-content flex">
         <div class="main-product">
-          <img src= '<?php echo "uploads/".$row['image'].""?>' alt="">
-          <p class="category"><?php echo $row2['name']?></p>
-          <h2><?php echo $row['Title']?></h2>
-          <p><?php echo $row['description']?></p>
+          <img src='<?php echo "uploads/" . $row['image'] . "" ?>' alt="">
+          <p class="category"><?php echo $row2['name'] ?></p>
+          <h2><?php echo $row['Title'] ?></h2>
+          <p><?php echo $row['description'] ?></p>
         </div>
         <div class="related-product">
           <h2>Recent Post</h2>

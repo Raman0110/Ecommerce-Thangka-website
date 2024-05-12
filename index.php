@@ -13,8 +13,11 @@
 </head>
 
 <body>
+  <?php
+  include 'connect.php';
+  require('session.php');
+  ?>
   <header class="header">
-
     <div class="container">
       <div class="flex">
         <div class="logo">
@@ -26,28 +29,48 @@
               <a href="" class="active">Home</a>
             </li>
             <li>
-              <a href="">About</a>
+              <a href="aboutus.php">About</a>
             </li>
-            <li>
-              <a href="">Green Tara</a>
-            </li>
-            <li>
-              <a href="">Mandala</a>
-            </li>
-            <li>
-              <a href="">Buddha Life</a>
-            </li>
+            <?php
+            $navSql = "SELECT * FROM categories";
+            $navResult = mysqli_query($conn, $navSql);
+            if ($navResult) {
+              if (mysqli_num_rows($navResult) > 0) {
+                while ($navs = mysqli_fetch_assoc($navResult)) {
+                  echo
+                  "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                }
+              }
+            }
+            ?>
             <li>
               <a href="blog.php">Blog</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="contactus.php">Contact</a>
             </li>
           </ul>
         </nav>
         <div class="icons">
-          <a href=""><i class="fa fa-user-circle fa-2x icon" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-search fa-2x icon" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
+          <?php
+          if(isset($_SESSION['username'])){
+            echo 
+            "
+            <a href='user-profile.php'><i class='fa fa-user-circle fa-2x icon' aria-hidden='true'></i></a>
+            <a href = 'logout.php'><i class='fa fa-sign-out fa-2x icon'></i></a>
+            ";
+          }else{
+            echo 
+            "
+            <a href='login.php' class='login-btn'>Login</a>
+            ";
+          }
+          ?>
           <i class="fa fa-bars fa-2x icon" id="bars" aria-hidden="true"></i>
         </div>
         <div class="mobile-nav">
@@ -60,31 +83,39 @@
                 <a href="" class="active">Home</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="aboutus.php">About</a>
               </li>
-              <li>
-                <a href="">Green Tara</a>
-              </li>
-              <li>
-                <a href="">Manjushree</a>
-              </li>
-              <li>
-                <a href="">Buddha Life</a>
-              </li>
-              <li>
-                <a href="">Mandala</a>
-              </li>
+              <?php
+              $navSql = "SELECT * FROM categories";
+              $navResult = mysqli_query($conn, $navSql);
+              if ($navResult) {
+                if (mysqli_num_rows($navResult) > 0) {
+                  while ($navs = mysqli_fetch_assoc($navResult)) {
+                    echo
+                    "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                  }
+                }
+              }
+              ?>
               <li>
                 <a href="blog.php">Blog</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="contactus.php">Contact</a>
               </li>
-
             </ul>
           </div>
         </div>
       </div>
+    </div>
+  <div class="searchForm d-none">
+      <form action="search-item.php" method="GET">
+        <input type="text" placeholder="Search" id="searchBox" name="search">
+      </form>
     </div>
   </header>
   <div class="banner">
@@ -93,7 +124,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="banner-slider">
-            <img src="banner.jpg" alt="" class="banner-img" />
+            <img src="mandala.jpg" alt="" class="banner-img" />
             <div class="container">
               <div class="banner-text">
                 <h1>Welcome to My Thankas</h1>
@@ -104,7 +135,7 @@
         </div>
         <div class="swiper-slide">
           <div class="banner-slider">
-            <img src="banner.jpg" alt="" class="banner-img" />
+            <img src="Buddha-Life.jpg" alt="" class="banner-img" />
             <div class="container">
               <div class="banner-text">
                 <h1>Welcome to My Thankas</h1>
@@ -133,11 +164,10 @@
 
   <!-- Product Section -->
   <?php
-  include 'connect.php';
   $featureQuery = "SELECT * FROM categories WHERE featured = 1 LIMIT 3";
-  $featureResult = mysqli_query($conn,$featureQuery);
-  if($featureResult){
-    while($newRow = mysqli_fetch_assoc($featureResult)){
+  $featureResult = mysqli_query($conn, $featureQuery);
+  if ($featureResult) {
+    while ($newRow = mysqli_fetch_assoc($featureResult)) {
       $catId = $newRow['ID'];
       $sql = "SELECT * FROM products WHERE Category_ID = $catId LIMIT 4";
       $result = mysqli_query($conn, $sql);
@@ -148,16 +178,16 @@
     <div class='container'>
       <div class='flex'>
         <div class='section-heading'>
-          <h2>".$newRow['Name']."</h2>
+          <h2>" . $newRow['Name'] . "</h2>
         </div>
-        <a href='' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
+        <a href=' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
       </div>
       <div class='section-body flex justify-center'>";
-        if ($result) {
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              echo
-              "
+      if ($result) {
+        if (mysqli_num_rows($result) > 0) {
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo
+            "
                 <div class='product-card'>
                       <div class='product-image'>
                         <a href='product-single.php?id=" . $row['ID'] . "'>
@@ -174,17 +204,17 @@
                       </div>
                 </div>
                 ";
-            }
           }
         }
-            echo"
+      }
+      echo "
             </div>
             </div>
             </section>
             ";
-          }
-        };
-          ?>
+    }
+  };
+  ?>
   <section class="Blogs">
     <div class="container">
       <div class="section-heading">
