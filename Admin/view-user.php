@@ -83,7 +83,7 @@
               </tr>
               <?php
                 include '../connect.php';
-                $sql = "SELECT * FROM users where isadmin='0'";
+                $sql = "SELECT * FROM users where isadmin=0";
                 $result = mysqli_query($conn,$sql);
                 if($result){
                   if(mysqli_num_rows($result)>0){
@@ -96,8 +96,8 @@
                       <td>".$row['email']."</td>
                       <td>".$row['phone']."</td>
                       <td>
-                        <a href='edit-blog.php?id=".$row['id']."' class='btn-edit'>Edit</a>
-                        <a href='delete-blog.php?id=".$row['id']."' class='btn-delete'>Delete</a>
+                        <a href='edit-user.php?id=".$row['userid']."' class='btn-edit'>Edit</a>
+                        <a href='delete-user.php?id=".$row['userid']."' class='btn-delete'>Delete</a>
                       </td>
                     </tr>";
                     $i++;
