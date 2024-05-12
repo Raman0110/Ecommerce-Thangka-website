@@ -1,4 +1,6 @@
-<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
+<?php require('../session.php');
+issetUsername()     ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,11 +23,13 @@
         if (mysqli_num_rows($result2) > 0) {
             $row = mysqli_fetch_assoc($result2);
         }
+    } else {
+        header('location:view-user.php');
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $name = $_POST['name'];
         $category = $_POST['category'];
-        $description = mysqli_real_escape_string($conn,$_POST['description']);
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
         $uploadDir = '../uploads/';
         $fileName = $_FILES['image']['name'];
         if (empty($fileName)) {
@@ -34,11 +38,11 @@
             if ($result) {
                 header('location:view-blog.php');
                 $Msg = 'Blog edited successfully';
-            } else {    
+            } else {
                 $Msg = 'Unable to edit blog';
             }
         } else {
-            $newFile = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
+            $newFile = pathinfo($_FILES['image']['name'], PATHINFO_FILENAME) . date('YmdHis') . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
             $targetDir = $uploadDir . $newFile;
             if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
                 $sql = "UPDATE blogs set title = '$name', categoryId = '$category', description = '$description', image = '$newFile' WHERE id = '$id'";
@@ -83,14 +87,14 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-        <div class=" flex justify-between">
-            Users<i class="fa fa-angle-down fa-1x"></i>
-          </div>
-          <ul class="dropdown-menu d-none">
-            <li><a href="view-user.php">View Users</a></li>
-            <li><a href="add-user.php">Add User</a></li>
-          </ul>
-        </li>
+                    <div class=" flex justify-between">
+                        Users<i class="fa fa-angle-down fa-1x"></i>
+                    </div>
+                    <ul class="dropdown-menu d-none">
+                        <li><a href="view-user.php">View Users</a></li>
+                        <li><a href="add-user.php">Add User</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <div class="flex justify-between">
                         Blog <i class="fa fa-angle-down fa-1x"></i>
@@ -115,7 +119,7 @@
             <div class="top-bar flex">
                 <div class="icons">
                     <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
-                    <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
+                    <a href='../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
                 </div>
             </div>
             <div class="add-form">

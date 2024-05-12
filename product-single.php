@@ -15,10 +15,7 @@
 <body><?php
   include 'connect.php';
   require('session.php');
-  ?>
-  <?php
   $id = $_GET['id'];
-  include 'connect.php';
   $sql = "SELECT p.*, c.Name AS cata 
   FROM products p 
   INNER JOIN categories c ON c.ID = p.Category_ID 
@@ -31,7 +28,8 @@
   }
   ?>
 
-  <header class="header">
+
+<header class="header">
     <div class="container">
       <div class="flex">
         <div class="logo">
@@ -46,7 +44,7 @@
               <a href="aboutus.php">About</a>
             </li>
             <?php
-            $navSql = "SELECT * FROM categories";
+            $navSql = "SELECT * FROM categories LIMIT 3";
             $navResult = mysqli_query($conn, $navSql);
             if ($navResult) {
               if (mysqli_num_rows($navResult) > 0) {
@@ -70,8 +68,21 @@
           </ul>
         </nav>
         <div class="icons">
-          <a href=""><i class="fa fa-user-circle fa-2x icon" aria-hidden="true"></i></a>
-          <a href=""><i class="fa fa-search fa-2x icon" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
+          <?php
+          if (isset($_SESSION['username'])) {
+            echo
+            "
+            <a href='user-profile.php'><i class='fa fa-user-circle fa-2x icon' aria-hidden='true'></i></a>
+            <a href = 'logout.php'><i class='fa fa-sign-out fa-2x icon'></i></a>
+            ";
+          } else {
+            echo
+            "
+            <a href='login.php' class='login-btn'>Login</a>
+            ";
+          }
+          ?>
           <i class="fa fa-bars fa-2x icon" id="bars" aria-hidden="true"></i>
         </div>
         <div class="mobile-nav">
@@ -86,17 +97,25 @@
               <li>
                 <a href="aboutus.php">About</a>
               </li>
+              <?php
+
+              $navSql = "SELECT * FROM categories LIMIT 3";
+              $navResult = mysqli_query($conn, $navSql);
+              if ($navResult) {
+                if (mysqli_num_rows($navResult) > 0) {
+                  while ($navs = mysqli_fetch_assoc($navResult)) {
+                    echo
+                    "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                  }
+                }
+              }
+              ?>
               <li>
-                <a href="">Green Tara</a>
-              </li>
-              <li>
-                <a href="">Manjushree</a>
-              </li>
-              <li>
-                <a href="">Buddha Life</a>
-              </li>
-              <li>
-                <a href="">Mandala</a>
+                <a href="blog.php">Blog</a>
               </li>
               <li>
                 <a href="contactus.php">Contact</a>
@@ -106,7 +125,7 @@
         </div>
       </div>
     </div>
-  <div class="searchForm d-none">
+    <div class="searchForm d-none">
       <form action="search-item.php" method="GET">
         <input type="text" placeholder="Search" id="searchBox" name="search">
       </form>
@@ -129,7 +148,21 @@
           <p><?php echo $row['Description']?></p>
           <p>Price: <?php echo $row['Price']?></p>
           <p>Size: <?php echo $row['Dimensions']?></p>
+          <?php
+          if(isset($_SESSION['username'])){
+            echo  
+            "
+            <button id='buy-btn'>Buy now</button>
+            ";
+          }
+          ?>
         </div>
+        <div class="order-msg flex d-none">
+          <i class="fa fa-check-circle fa-4x"></i>
+          <h2>Order Placed Successfully!</h2>
+          <button id="ok-btn">Ok</button>
+        </div>
+        
         <div class="related-product">
           <h2>Related Products</h2>
           <div class="more-product flex">

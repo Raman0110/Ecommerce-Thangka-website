@@ -32,7 +32,7 @@
               <a href=""class="active">About</a>
             </li>
             <?php
-            $navSql = "SELECT * FROM categories";
+            $navSql = "SELECT * FROM categories LIMIT 3";
             $navResult = mysqli_query($conn, $navSql);
             if ($navResult) {
               if (mysqli_num_rows($navResult) > 0) {
@@ -86,7 +86,8 @@
                 <a href="aboutus.php">About</a>
               </li>
               <?php
-              $navSql = "SELECT * FROM categories";
+              
+            $navSql = "SELECT * FROM categories LIMIT 3";
               $navResult = mysqli_query($conn, $navSql);
               if ($navResult) {
                 if (mysqli_num_rows($navResult) > 0) {

@@ -1,14 +1,4 @@
-var swiper = new Swiper(".banner-swiper", {
-  loop: true,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
+
 let bars = document.querySelector("#bars");
 let mobileNav = document.querySelector(".mobile-nav");
 bars.addEventListener('click', () => {
@@ -23,5 +13,13 @@ let searchForm = document.querySelector('.searchForm');
 searchBtn.addEventListener('click',()=>{
   searchForm.classList.toggle("d-none");
 })
-
+let buyBtn = document.querySelector('#buy-btn');
+let orderMsg = document.querySelector('.order-msg');
+buyBtn.addEventListener('click',()=>{
+  orderMsg.classList.remove("d-none");
+})
+let okBtn = document.querySelector('#ok-btn');
+okBtn.addEventListener('click',()=>{
+  orderMsg.classList.add("d-none");
+})
 

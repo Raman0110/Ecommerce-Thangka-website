@@ -5,5 +5,7 @@ include '../connect.php';
   $result = mysqli_query($conn,$sql);
   if($result){
     header('location:view-user.php');
+  }else{
+    header('location:view-user.php');
   }
 ?>

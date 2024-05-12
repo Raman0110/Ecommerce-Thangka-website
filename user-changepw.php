@@ -20,7 +20,7 @@
   $result = mysqli_query($conn, $sql);
   if (mysqli_num_rows($result)) {
     $row = mysqli_fetch_assoc($result);
-  }else{
+  } else {
     header('location:error404.php');
   }
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -55,7 +55,7 @@
               <a href="aboutus.php">About</a>
             </li>
             <?php
-            $navSql = "SELECT * FROM categories";
+            $navSql = "SELECT * FROM categories LIMIT 3";
             $navResult = mysqli_query($conn, $navSql);
             if ($navResult) {
               if (mysqli_num_rows($navResult) > 0) {
@@ -79,7 +79,7 @@
           </ul>
         </nav>
         <div class="icons">
-          <a href=""><i class="fa fa-search fa-2x icon" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
           <?php
           if (isset($_SESSION['username'])) {
             echo
@@ -109,7 +109,8 @@
                 <a href="aboutus.php">About</a>
               </li>
               <?php
-              $navSql = "SELECT * FROM categories";
+
+              $navSql = "SELECT * FROM categories LIMIT 3";
               $navResult = mysqli_query($conn, $navSql);
               if ($navResult) {
                 if (mysqli_num_rows($navResult) > 0) {
@@ -135,7 +136,7 @@
         </div>
       </div>
     </div>
-  <div class="searchForm d-none">
+    <div class="searchForm d-none">
       <form action="search-item.php" method="GET">
         <input type="text" placeholder="Search" id="searchBox" name="search">
       </form>

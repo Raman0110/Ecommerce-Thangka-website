@@ -5,6 +5,8 @@
   $result = mysqli_query($conn,$sql);
   if($result){
     header('location:view-product-category.php');
+  }else{
+    header('location:view-user.php');
   }
 
 

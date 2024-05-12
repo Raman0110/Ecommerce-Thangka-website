@@ -807,3 +807,42 @@ input::-webkit-inner-spin-button {
 .about-image{
     width: 30%;
 }
+#buy-btn{
+    border: none;
+    padding: 8px 16px;
+    background-color: var(--green);
+    color: white;
+    margin-top: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+}
+#buy-btn:hover{
+    background-color: white;
+    border: 1px solid var(--green);
+    color: var(--green);
+}
+.order-msg{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 50%;
+    background-color: var(--green);
+    color: white;
+    border-radius: 8px;
+    height: 55%;
+    flex-direction: column;
+    justify-content: center;
+}
+#ok-btn{
+    
+    border: none;
+    padding: 8px 20px;
+    background-color: white;
+    color: var(--green);
+    margin-top: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+}

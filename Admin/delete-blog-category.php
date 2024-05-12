@@ -6,6 +6,8 @@
   if($result){
     header('location:view-blog-category.php');
     $Msg = "Item Deleted Successfully";
+  }else{
+    header('location:view-user.php');
   }
 
 

@@ -32,7 +32,7 @@
               <a href="aboutus.php">About</a>
             </li>
             <?php
-            $navSql = "SELECT * FROM categories";
+            $navSql = "SELECT * FROM categories LIMIT 3";
             $navResult = mysqli_query($conn, $navSql);
             if ($navResult) {
               if (mysqli_num_rows($navResult) > 0) {
@@ -86,7 +86,7 @@
                 <a href="aboutus.php">About</a>
               </li>
               <?php
-              $navSql = "SELECT * FROM categories";
+              $navSql = "SELECT * FROM categories LIMIT 3";
               $navResult = mysqli_query($conn, $navSql);
               if ($navResult) {
                 if (mysqli_num_rows($navResult) > 0) {
@@ -318,6 +318,19 @@
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
+  <script>
+    var swiper = new Swiper(".banner-swiper", {
+  loop: true,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
+  </script>
 </body>
 
 </html>
