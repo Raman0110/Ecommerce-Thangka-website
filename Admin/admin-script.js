@@ -80,6 +80,63 @@ function validateProduct(isAdd) {
   }
   return isvalid;
 }
+function validateSignup() {
+  const signupUname = document.querySelector("#r-username");
+  const phone = document.querySelector("#phone");
+  const email = document.querySelector("#email");
+  const signupPassword = document.querySelector("#password");
+  const signupCpassword = document.querySelector("#c-password");
+  let signupUnameErr = document.querySelector("#r-username-err");
+  let phoneErr = document.querySelector("#phone-err");
+  let emailErr = document.querySelector("#email-err");
+  let signupPasswordErr = document.querySelector("#r-password-err");
+  let signupCpasswordErr = document.querySelector("#r-cpassword-err");
+  signupUnameErr.innerHTML = "";
+  phoneErr.innerHTML = "";
+  emailErr.innerHTML = "";
+  signupPasswordErr.innerHTML = "";
+  signupCpasswordErr.innerHTML = "";
+
+  let isValid = true;
+  if (signupUname.value === "") {
+    isValid = false;
+    signupUnameErr.innerHTML = "Create a username";
+  } else if (signupUname.value.length <= 6) {
+    isValid = false;
+    signupUnameErr.innerHTML =
+      "Username should be greater than 6 characters";
+  }
+  if (phone.value === "") {
+    isValid = false;
+    phoneErr.innerHTML = "Enter your phone number";
+  } else if (phone.value.length != 10) {
+    isValid = false;
+    phoneErr.innerHTML = "Enter valid phone number";
+  }
+  var validRegex = /^[a-zA-Z0-9!#_]+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+  if (email.value === "") {
+    isValid = false;
+    emailErr.innerHTML = "Enter email";
+  } else if (!email.value.match(validRegex)) {
+    isValid = false;
+    emailErr.innerHTML = "Enter valid email";
+  }
+  if (signupPassword.value === "") {
+    isValid = false;
+    signupPasswordErr.innerHTML = "Create passowrd";
+  } else if (signupPassword.value.length < 8) {
+    isValid = false;
+    signupPasswordErr.innerHTML = "Passowrd must contain 8 characters";
+  }
+  if (signupCpassword.value === "") {
+    isValid = false;
+    signupCpasswordErr.innerHTML = "Repeat your password here";
+  } else if (signupCpassword.value !== signupPassword.value) {
+    isValid = false;
+    signupCpasswordErr.innerHTML = "Password doesn't match";
+  }
+  return isValid;
+}
 
 function validateBlog(isAdd) {
   const blogName = document.querySelector('#b-name');

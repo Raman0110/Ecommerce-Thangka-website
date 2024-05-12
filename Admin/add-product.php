@@ -13,6 +13,7 @@
 <body>
   <?php
   
+  include '../connect.php';
   
   $Msg = '';
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -25,7 +26,6 @@
     $fileName = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION); 
     $targetDir = $uploadDir.$fileName;
     $date = date("Y-m-d");
-    include '../connect.php';
     if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
       $sql = "INSERT INTO products(Title,Description,Price,Dimensions,Image_URL,Date,Category_ID) values('$productName','$description','$price','$size','$fileName','$date','$category')";
     $result  = mysqli_query($conn, $sql);
