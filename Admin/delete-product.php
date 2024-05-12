@@ -6,9 +6,4 @@
   if($result){
     header('location:view-product.php');
   }
-
-
-
-
-
 ?>
