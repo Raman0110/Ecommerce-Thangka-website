@@ -29,7 +29,7 @@
               <a href="" class="active">Home</a>
             </li>
             <li>
-              <a href="">About</a>
+              <a href="aboutus.php">About</a>
             </li>
             <?php
             $navSql = "SELECT * FROM categories";
@@ -51,7 +51,7 @@
               <a href="blog.php">Blog</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="contactus.php">Contact</a>
             </li>
           </ul>
         </nav>
@@ -83,7 +83,7 @@
                 <a href="" class="active">Home</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="aboutus.php">About</a>
               </li>
               <?php
               $navSql = "SELECT * FROM categories";
@@ -105,7 +105,7 @@
                 <a href="blog.php">Blog</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="contactus.php">Contact</a>
               </li>
             </ul>
           </div>
@@ -124,7 +124,7 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <div class="banner-slider">
-            <img src="banner.jpg" alt="" class="banner-img" />
+            <img src="mandala.jpg" alt="" class="banner-img" />
             <div class="container">
               <div class="banner-text">
                 <h1>Welcome to My Thankas</h1>
@@ -135,7 +135,7 @@
         </div>
         <div class="swiper-slide">
           <div class="banner-slider">
-            <img src="banner.jpg" alt="" class="banner-img" />
+            <img src="Buddha-Life.jpg" alt="" class="banner-img" />
             <div class="container">
               <div class="banner-text">
                 <h1>Welcome to My Thankas</h1>

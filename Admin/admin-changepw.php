@@ -62,7 +62,7 @@
             <li><a href="view-product-category.php">View Product Category</a></li>
             <li><a href="add-product-category.php">Add Product Category</a></li>
           </ul>
-        </li>
+        </li></li>Users</li>
         <li class="dropdown">
           <div class=" flex justify-between">
             Blog <i class="fa fa-angle-down fa-1x"></i>

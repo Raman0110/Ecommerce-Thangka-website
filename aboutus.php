@@ -5,17 +5,18 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>About Us</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="responsive.css" />
 </head>
 
-<body><?php
-      include 'connect.php';
-      require('session.php');
-      ?>
+<body>
+  <?php
+  include 'connect.php';
+  require('session.php');
+  ?>
   <header class="header">
     <div class="container">
       <div class="flex">
@@ -28,10 +29,9 @@
               <a href="index.php">Home</a>
             </li>
             <li>
-              <a href="aboutus.php">About</a>
+              <a href=""class="active">About</a>
             </li>
             <?php
-            include 'connect.php';
             $navSql = "SELECT * FROM categories";
             $navResult = mysqli_query($conn, $navSql);
             if ($navResult) {
@@ -47,7 +47,8 @@
               }
             }
             ?>
-            <a href="blog.php" class="active">Blog</a>
+            <li>
+              <a href="blog.php">Blog</a>
             </li>
             <li>
               <a href="contactus.php">Contact</a>
@@ -79,22 +80,29 @@
           <div class="navigations">
             <ul>
               <li>
-                <a href="">Home</a>
+                <a href="index.php">Home</a>
               </li>
               <li>
                 <a href="aboutus.php">About</a>
               </li>
+              <?php
+              $navSql = "SELECT * FROM categories";
+              $navResult = mysqli_query($conn, $navSql);
+              if ($navResult) {
+                if (mysqli_num_rows($navResult) > 0) {
+                  while ($navs = mysqli_fetch_assoc($navResult)) {
+                    echo
+                    "          
+                    <li>
+                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
+                    </li>
+                    ";
+                  }
+                }
+              }
+              ?>
               <li>
-                <a href="">Green Tara</a>
-              </li>
-              <li>
-                <a href="">Manjushree</a>
-              </li>
-              <li>
-                <a href="">Buddha Life</a>
-              </li>
-              <li>
-                <a href="">Mandala</a>
+                <a href="blog.php">Blog</a>
               </li>
               <li>
                 <a href="contactus.php">Contact</a>
@@ -113,79 +121,19 @@
   <section class="breadcrumb">
     <div class="container">
       <div class="breadcrumb-content flex">
-        <i class="fa fa-home"></i><a href="index.php">Home</a><i class="fa fa-angle-right"></i>Blog
+        <i class="fa fa-home"></i><a href="index.php">Home</a><i class="fa fa-angle-right"></i>About us
       </div>
     </div>
   </section>
-  <section class="Blogs">
-    <div class="container">
-      <div class="section-heading">
-        <h2>Blogs & News</h2>
+  <section class="about-us container">
+    <div class="flex">
+      <div class="about-text">
+        <h2>About us</h2>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat eligendi ipsum reiciendis! Odio quia cupiditate, praesentium maxime nisi, atque obcaecati, assumenda sapiente qui quam perspiciatis eveniet!</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo vero laborum dolorem culpa impedit veritatis aut est soluta ad similique cupiditate, expedita atque id magni beatae eaque cumque quidem, sint illum reprehenderit totam ex facere quis eveniet. Quasi, odio nisi?Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab maxime, eum ipsam, fugit natus veniam, dignissimos nostrum sequi omnis quidem doloremque quaerat cum ducimus dolorum. </p>
       </div>
-      <div class="section-body flex justify-center align-stretch">
-        <?php
-        $sql = 'SELECT * FROM blogs';
-        $result = mysqli_query($conn, $sql);
-        if ($result) {
-          if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-              $categories = $row['categoryId'];
-              $sql2 = "SELECT * FROM blogCategories WHERE id = $categories";
-              $result2 = mysqli_query($conn, $sql2);
-              if ($result2) {
-                $row2 = mysqli_fetch_assoc($result2);
-              }
-              echo
-              "<div class='blog-card'>
-              <div class='blog-image'>
-                <a href='blog-single.php?id=" . $row['id'] . "'>
-                  <img src='uploads/" . $row['image'] . "' alt='' class='w-100'>
-                </a>
-              </div>
-              <div class='blog-info'>
-                <p class='blog-catagory'>" . $row2['name'] . "</p>
-                <h4>" . $row['title'] . "</h4>
-                <p>" . substr($row['description'], 0, 50) . "</p>
-                <a href='blog-single.php?id=" . $row['id'] . "'>Read More<i class='fa fa-angle-double-right fa-lg'></i></a>
-              </div>
-            </div>";
-            }
-          }
-        }
-        ?>
-      </div>
-    </div>
-  </section>
-  <section class="features">
-    <div class="container">
-      <div class="feature-section flex">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
-          </div>
-          <div class="feature-text">
-            <h4>Fast Shipping</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
-          </div>
-          <div class="feature-text">
-            <h4>Fast Shipping</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
-          </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
-          </div>
-          <div class="feature-text">
-            <h4>Fast Shipping</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
-          </div>
-        </div>
+      <div class="about-image">
+        <img src="Green-Tara.jpg" alt="">
       </div>
     </div>
   </section>
@@ -200,7 +148,7 @@
           <div class="m-auto">
             <h4>Quick links</h4>
             <ul>
-              <li><a href="index.php">Home</a></li>
+              <li><a href="">Home</a></li>
               <li><a href="">About us</a></li>
               <li><a href="">Contact us</a></li>
               <li><a href="blog.php">Blog</a></li>

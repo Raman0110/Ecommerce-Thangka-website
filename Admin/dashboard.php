@@ -1,4 +1,5 @@
-<?php require('../session.php'); issetUsername();?>  
+<?php require('../session.php');
+issetUsername(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +7,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="admin-style.css" />
 </head>
@@ -35,6 +36,9 @@
             <li><a href="add-product-category.php">Add Product Category</a></li>
           </ul>
         </li>
+        <li>
+          Users
+        </li>
         <li class="dropdown">
           <div class=" flex justify-between">
             Blog <i class="fa fa-angle-down fa-1x"></i>
@@ -59,10 +63,19 @@
       <div class="top-bar flex">
         <div class="icons">
           <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
-          <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
+          <a href='../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
         </div>
       </div>
-      <h3>Welcome User</h3>
+      <?php
+      include '../connect.php';
+      $username = $_SESSION['username'];
+      $sql = "SELECT * FROM users WHERE username = '$username'";
+      $result = mysqli_query($conn, $sql);
+      if ($result) {
+        $row = mysqli_fetch_assoc($result);
+      }
+      ?>
+      <h3>Welcome <?php echo $row['username'] ?></h3>
       <div class="main-content flex justify-between">
         <div class="recent-content">
           <h4>Recent Product</h4>
@@ -75,7 +88,6 @@
               <th>Date</th>
             </tr>
             <?php
-            include '../connect.php';
             $recentPostSql = "SELECT * FROM products ORDER BY Date DESC LIMIT 5";
             $recentPostResult = mysqli_query($conn, $recentPostSql);
             if ($recentPostResult) {

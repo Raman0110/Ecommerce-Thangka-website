@@ -52,7 +52,7 @@
               <a href="index.php">Home</a>
             </li>
             <li>
-              <a href="">About</a>
+              <a href="aboutus.php">About</a>
             </li>
             <?php
             $navSql = "SELECT * FROM categories";
@@ -74,7 +74,7 @@
               <a href="blog.php">Blog</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="contactus.php">Contact</a>
             </li>
           </ul>
         </nav>
@@ -106,7 +106,7 @@
                 <a href="" class="active">Home</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="aboutus.php">About</a>
               </li>
               <?php
               $navSql = "SELECT * FROM categories";
@@ -128,7 +128,7 @@
                 <a href="blog.php">Blog</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="contactus.php">Contact</a>
               </li>
             </ul>
           </div>

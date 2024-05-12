@@ -18,9 +18,9 @@
   $username = $_SESSION['username'];
   $sql = "SELECT * FROM users WHERE username = '$username'";
   $result = mysqli_query($conn, $sql);
-  if (mysqli_num_rows($result)>0) {
+  if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-  }else{
+  } else {
     header('location:error404.php');
   }
   ?>
@@ -37,7 +37,7 @@
               <a href="index.php">Home</a>
             </li>
             <li>
-              <a href="">About</a>
+              <a href="aboutus.php">About</a>
             </li>
             <?php
             $navSql = "SELECT * FROM categories";
@@ -59,12 +59,12 @@
               <a href="blog.php">Blog</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="contactus.php">Contact</a>
             </li>
           </ul>
         </nav>
         <div class="icons">
-          <a href=""><i class="fa fa-search fa-2x icon" aria-hidden="true"></i></a>
+          <a href="#"><i class="fa fa-search fa-2x icon" id="search-btn" aria-hidden="true"></i></a>
           <?php
           if (isset($_SESSION['username'])) {
             echo
@@ -91,7 +91,7 @@
                 <a href="" class="active">Home</a>
               </li>
               <li>
-                <a href="">About</a>
+                <a href="aboutus.php">About</a>
               </li>
               <?php
               $navSql = "SELECT * FROM categories";
@@ -113,14 +113,14 @@
                 <a href="blog.php">Blog</a>
               </li>
               <li>
-                <a href="">Contact</a>
+                <a href="contactus.php">Contact</a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-  <div class="searchForm d-none">
+    <div class="searchForm d-none">
       <form action="search-item.php" method="GET">
         <input type="text" placeholder="Search" id="searchBox" name="search">
       </form>

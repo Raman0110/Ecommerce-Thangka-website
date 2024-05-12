@@ -733,3 +733,76 @@ input::-webkit-inner-spin-button {
 .admin-card{
     box-shadow: 1px 1px 10px black;
 }
+.contact-form{
+    background-color: var(--green);
+    width: 80%;
+}
+.contact-section{
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: white;
+}
+.contact-form{
+    border-radius: 8px;
+    padding: 16px;
+    justify-content: space-around;
+}
+.form-section{
+    width: 60%;
+    padding: 16px;
+    border-right: 1px solid white;
+}
+.info-section{
+    width: 30%;
+}
+.contact-input{
+    flex-direction: column;
+    align-items: start;
+}
+.contact-input input{
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    background-color: #5A9F68;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid white;
+    font-size: 18px;
+}
+.contact-form textarea{
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    border: none;
+    outline: none;
+}
+#contact-btn{
+    border: none;
+    padding: 8px 16px;
+    background-color: white;
+    color: var(--green);
+    margin-top: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease-out;
+}
+#contact-btn:hover{
+    background-color: var(--green);
+    color: white;
+    border: 1px solid white;
+}
+.about-text{
+    width: 60%;
+    align-self: flex-start;
+}
+.about-text h2{
+    color: var(--green);
+    margin-bottom: 1rem;
+}
+.about-text p{
+    margin-bottom: 1rem;
+}
+.about-image{
+    width: 30%;
+}
