@@ -35,7 +35,7 @@
             if ($result) {
                 header('location:view-blog.php');
                 $Msg = 'Blog edited successfully';
-            } else {
+            } else {    
                 $Msg = 'Unable to edit blog';
             }
         } else {

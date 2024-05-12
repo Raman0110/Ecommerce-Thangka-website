@@ -141,6 +141,7 @@
       $catId = $newRow['ID'];
       $sql = "SELECT * FROM products WHERE Category_ID = $catId LIMIT 4";
       $result = mysqli_query($conn, $sql);
+
       echo 
       "
       <section class='product greenTara'>
@@ -149,7 +150,7 @@
         <div class='section-heading'>
           <h2>".$newRow['Name']."</h2>
         </div>
-        <a href=' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
+        <a href='' class='view-button'>View all<i class='fa fa-angle-double-right'></i></a>
       </div>
       <div class='section-body flex justify-center'>";
         if ($result) {
