@@ -25,7 +25,7 @@
     $size = $_POST['size'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-    $description = $_POST['description'];
+    $description = mysqli_real_escape_string($conn,$_POST['description']);
     $uploadDir = '../uploads/';
     $fileName = $_FILES['image']['name'];
     if(empty($fileName)){

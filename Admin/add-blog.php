@@ -19,7 +19,7 @@
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
     $category = $_POST['category'];
-    $description = $_POST['description'];
+    $description = mysqli_real_escape_string($conn,$_POST['description']);
     $uploadDir = '../uploads/';
     $fileName = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
     $targetDir = $uploadDir.$fileName;
