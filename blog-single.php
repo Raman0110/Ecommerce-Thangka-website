@@ -78,6 +78,7 @@
             echo
             "
             <a href='user-profile.php'><i class='fa fa-user-circle fa-2x icon' aria-hidden='true'></i></a>
+            <a href = 'cart.php'><i class='fa fa-shopping-cart fa-2x icon'></i></a>
             <a href = 'logout.php'><i class='fa fa-sign-out fa-2x icon'></i></a>
             ";
           } else {
