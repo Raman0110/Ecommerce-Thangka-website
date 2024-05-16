@@ -881,7 +881,7 @@ input::-webkit-inner-spin-button {
     align-self: flex-end;
     width: 36%;
 }
-.product-price p, .product-price h3{
+.product-price{
     text-align: end;
 }
 .cart-checkout span{
@@ -890,4 +890,28 @@ input::-webkit-inner-spin-button {
 .cart-checkout{
     padding: 16px;
     text-align: end;
+}
+.remove-btn{
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+}
+.remove-btn:hover{
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+}
+.remove-all{
+    background: none;
+    border: none;
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.empty{
+    text-align: center;
 }

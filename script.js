@@ -15,11 +15,11 @@ searchBtn.addEventListener('click',()=>{
 })
 let buyBtn = document.querySelector('#buy-btn');
 let orderMsg = document.querySelector('.order-msg');
-buyBtn.addEventListener('click',()=>{
+buyBtn.addEventListener('click',()=>{dd
   orderMsg.classList.remove("d-none");
 })
 let okBtn = document.querySelector('#ok-btn');
-okBtn.addEventListener('click',()=>{
+okBtn.addEventListener('click',()=>{d
   orderMsg.classList.add("d-none");
 })
 

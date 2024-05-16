@@ -132,72 +132,42 @@
       <div class="cart-box">
         <div class="cart-heading flex">
           <h4>Shopping Cart</h4>
-          <a href="">
-            <p>Remove all</p>
-          </a>
+            <form action="cart-items.php" method = "POST">
+              <button class="remove-all" name = "remove-all">Remove all</button>
+            </form> 
         </div>
-        <div class="cart-content flex">
-          <div class="product-img-name flex">
-            <img src="buddha.jpg" alt="">
-            <div class="product-details">
-              <h3>Buddha Life</h3>
-              <p>12*80</p>
+        <?php
+        $total = 0;
+        if (count($_SESSION['cart'])>0) {
+          foreach ($_SESSION['cart'] as $cartItem) {
+            $total += $cartItem['price'];
+            $itemIndex = array_search($cartItem['name'], array_column($_SESSION['cart'], 'name'));
+            echo
+            "
+              <div class='cart-content flex'>
+              <div class='product-img-name flex'>
+                <img src='uploads/" . $cartItem['img'] . "' alt=''>
+                <div class='product-details'>
+                  <h3>" . $cartItem['name'] . "</h3>
+                  <p>" . $cartItem['size'] . "</p>
+                </div>
+              </div>
+              <div class='product-price'>
+                <h3>Rs " . $cartItem['price'] . "</h3>
+                <form action='cart-items.php' method='POST'>
+                  <input type='hidden' name='item-index' value='$itemIndex'>
+                  <button class='remove-btn' name = 'remove-btn'>Remove</button>
+                </form>
+              </div>
             </div>
-          </div>
-          <div class="product-price">
-            <h3>Rs 80000</h3>
-            <a href="">
-              <p>Remove</p>
-            </a>
-          </div>
-        </div>
-        <div class="cart-content flex">
-          <div class="product-img-name flex">
-            <img src="buddha.jpg" alt="">
-            <div class="product-details">
-              <h3>Buddha Life</h3>
-              <p>12*80</p>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3>Rs 80000</h3>
-            <a href="">
-              <p>Remove</p>
-            </a>
-          </div>
-        </div>
-        <div class="cart-content flex">
-          <div class="product-img-name flex">
-            <img src="buddha.jpg" alt="">
-            <div class="product-details">
-              <h3>Buddha Life</h3>
-              <p>12*80</p>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3>Rs 80000</h3>
-            <a href="">
-              <p>Remove</p>
-            </a>
-          </div>
-        </div>
-        <div class="cart-content flex">
-          <div class="product-img-name flex">
-            <img src="buddha.jpg" alt="">
-            <div class="product-details">
-              <h3>Buddha Life</h3>
-              <p>12*80</p>
-            </div>
-          </div>
-          <div class="product-price">
-            <h3>Rs 80000</h3>
-            <a href="">
-              <p>Remove</p>
-            </a>
-          </div>
-        </div>
+            ";
+          }
+        }else{
+          echo "<h2 class='empty'>Cart Empty</h2>";
+        }
+        ?>
         <div class="cart-checkout">
-          <h3><span>Total</span> Rs80,000</h3>
+          <h3><span>Total </span>Rs<?php echo $total ?> </h3>
           <button id="buy-btn">Check out</button>
         </div>
       </div>
@@ -232,21 +202,7 @@
       </div>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
-  <script>
-    var swiper = new Swiper(".banner-swiper", {
-      loop: true,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  </script>
 </body>
 
 </html>

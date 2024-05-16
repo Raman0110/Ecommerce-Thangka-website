@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="responsive.css">
-</head>
-
-<body><?php
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+  </head>
+  
+  <body><?php
   include 'connect.php';
   require('session.php');
   $id = $_GET['id'];
@@ -150,10 +149,21 @@
           <p>Price: <?php echo $row['Price']?></p>
           <p>Size: <?php echo $row['Dimensions']?></p>
           <?php
+
           if(isset($_SESSION['username'])){
+            $product_name = $row['Title'];
+            $product_price = $row['Price'];
+            $product_size = $row['Dimensions'];
+            $product_img = $row['Image_URL'];
             echo  
             "
-            <button id='cart-btn'>Add to cart</button>
+            <form action='cart-items.php' method='POST'>
+            <input type='hidden' name='name' value='$product_name'>
+            <input type='hidden' name='price' value='$product_price'>
+            <input type='hidden' name='size' value='$product_size'>
+            <input type='hidden' name='img' value='$product_img'>
+            <button id='cart-btn' name='add-cart-btn' type = 'submit'>Add to cart</button>
+            </form>
             ";
           }
           ?>
