@@ -83,7 +83,7 @@
               </tr>
               <?php
                 include '../connect.php';
-                $sql = "SELECT b.*,c.name as cata FROM blogs b INNER JOIN blogcategories c on c.id = b.categoryId";
+                $sql = "SELECT b.*,c.name as cata FROM blogs b INNER JOIN blogCategories c on c.id = b.categoryId";
                 $result = mysqli_query($conn,$sql);
                 if($result){
                   if(mysqli_num_rows($result)>0){

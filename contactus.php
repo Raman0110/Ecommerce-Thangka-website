@@ -16,6 +16,9 @@
   <?php
   include 'connect.php';
   require('session.php');
+  if(isset($_POST['send'])){
+
+  }
   ?>
   <header class="header">
     <div class="container">
@@ -132,7 +135,7 @@
       <div class="flex justify-center">
         <div class="contact-form flex">
           <div class="form-section">
-            <form action="" class="flex contact-input">
+            <form action="contactus.php" class="flex contact-input" method="POST">
               <label for="name">Name</label>
               <input type="text" name="name" id="name">
               <label for="email">Email</label>
@@ -141,7 +144,7 @@
               <input type="text" name="subject" id="subject">
               <label for="message">Message</label>
               <textarea name="message" id="message" rows="10"></textarea>
-              <button type="submit" id="contact-btn">Send</button>
+              <button type="submit" id="contact-btn" name = "send" >Send</button>
             </form>
           </div>
           <div class="info-section">

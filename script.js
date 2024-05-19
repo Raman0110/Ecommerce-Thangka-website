@@ -13,13 +13,4 @@ let searchForm = document.querySelector('.searchForm');
 searchBtn.addEventListener('click',()=>{
   searchForm.classList.toggle("d-none");
 })
-let buyBtn = document.querySelector('#buy-btn');
-let orderMsg = document.querySelector('.order-msg');
-buyBtn.addEventListener('click',()=>{dd
-  orderMsg.classList.remove("d-none");
-})
-let okBtn = document.querySelector('#ok-btn');
-okBtn.addEventListener('click',()=>{d
-  orderMsg.classList.add("d-none");
-})
 

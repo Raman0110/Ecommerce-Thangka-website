@@ -138,7 +138,7 @@
         </div>
         <?php
         $total = 0;
-        if (count($_SESSION['cart'])>0) {
+        if (isset($_SESSION['cart'])) {
           foreach ($_SESSION['cart'] as $cartItem) {
             $total += $cartItem['price'];
             $itemIndex = array_search($cartItem['name'], array_column($_SESSION['cart'], 'name'));
@@ -168,10 +168,12 @@
         ?>
         <div class="cart-checkout">
           <h3><span>Total </span>Rs<?php echo $total ?> </h3>
-          <button id="buy-btn">Check out</button>
+          <form action="cart-items.php" method="POST">
+          <input type="hidden" name = "total-amount" value = '<?php echo $total ?>'>
+          <button id="buy-btn" name="buy-btn">Check out</button>
+          </form>
         </div>
       </div>
-    </div>
   </section>
   <footer>
     <div class="container">

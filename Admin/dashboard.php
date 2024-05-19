@@ -19,6 +19,9 @@ issetUsername(); ?>
       <ul class="sidebar-nav">
         <li><a href="dashboard.php">Dashboard</a></li>
         <li class="dropdown">
+            <a href="order.php">Orders</a>
+        </li>
+        <li class="dropdown">
           <div class=" flex justify-between">
             Product <i class="fa fa-angle-down fa-1x"></i>
           </div>
@@ -122,7 +125,8 @@ issetUsername(); ?>
         </div>
         <div class="overall-content">
           <div class="overall-detail flex">
-            <div class="detail-card">
+            <a href="view-product.php" class="detail-card">
+            <div>
               <p>No of Products</p>
               <span>
                 <?php
@@ -135,7 +139,9 @@ issetUsername(); ?>
                 ?>
               </span>
             </div>
-            <div class="detail-card">
+            </a>
+            <a href="view-blog.php" class="detail-card">
+            <div>
               <p>No of Blog</p>
               <span>
                 <?php
@@ -149,7 +155,9 @@ issetUsername(); ?>
 
               </span>
             </div>
-            <div class="detail-card">
+            </a>
+            <a href="view-product-category.php" class="detail-card">
+            <div>
               <p>No of Product Category</p>
               <span>
                 <?php
@@ -162,7 +170,9 @@ issetUsername(); ?>
                 ?>
               </span>
             </div>
-            <div class="detail-card">
+            </a>
+            <a href="view-blog-category.php" class="detail-card">
+            <div>
               <p>No of Blog Category</p>
               <span>
                 <?php
@@ -175,6 +185,38 @@ issetUsername(); ?>
                 ?>
               </span>
             </div>
+            </a>
+            <a href="order.php" class="detail-card">
+            <div>
+              <p>No of Orders</p>
+              <span>
+                <?php
+                $orderNumSql = "SELECT COUNT(*) as orderNum FROM Orders";
+                $orderNumResult = mysqli_query($conn, $orderNumSql);
+                if ($orderNumResult) {
+                  $orderNums = mysqli_fetch_assoc($orderNumResult);
+                  echo $orderNums['orderNum'];
+                }
+                ?>
+              </span>
+            </div>
+            </a>
+            <a href="order.php" class="detail-card">
+            <div>
+              <p>Overall Turnover</p>
+              <span>
+                <?php
+                $totalTurnoverSql = "SELECT SUM(TotalAmount) as total FROM Orders";
+                $totalTurnoverResult = mysqli_query($conn, $totalTurnoverSql);
+                if ($totalTurnoverResult) {
+                  $turnOver = mysqli_fetch_assoc($totalTurnoverResult);
+                  $amount  = 'Rs'.$turnOver['total'];
+                  echo "<h4 id='turnOver'>$amount</h4>";
+                }
+                ?>
+              </span>
+            </div>
+            </a>
           </div>
         </div>
       </div>

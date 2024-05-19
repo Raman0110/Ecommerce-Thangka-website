@@ -128,6 +128,13 @@ ul {
   color: white;
   padding: 8px 5px;
   font-weight: 600;
+  transition: all 0.3s ease-out;
+}
+.detail-card:hover{
+  background-color: white;
+  color: var(--green);
+  cursor: pointer;
+  border: 1px solid var(--green);
 }
 .detail-card p {
   font-size: 14px;
@@ -254,4 +261,12 @@ ul {
 }
 .change-pw-form button{
   align-self: flex-start;
+}
+.dropdown a{
+  color: white;
+}
+#turnOver{
+  margin-top: 6px;
+  overflow: hidden;
+  font-size: 24px;
 }

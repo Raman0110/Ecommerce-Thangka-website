@@ -18,6 +18,9 @@ body {
     color: #222;
     overflow-x: hidden;
 }
+.white{
+    color: white;
+}
 
 p {
     text-align: justify;
@@ -914,4 +917,5 @@ input::-webkit-inner-spin-button {
 }
 .empty{
     text-align: center;
+    color: red;
 }
