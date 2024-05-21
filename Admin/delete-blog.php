@@ -6,6 +6,6 @@
   if($result){
     header('location:view-blog.php');
   }else{
-    header('location:view-user.php');
+    header('location:error.php');
   }
 ?>

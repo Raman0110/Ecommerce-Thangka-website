@@ -21,9 +21,9 @@
     if($result2){
       if(mysqli_num_rows($result2)>0){
         $row2 = mysqli_fetch_assoc($result2);
+      }else{
+        header('location:error.php');
       }
-    }else{
-      header('location:view-user.php');
     }
     if($_SERVER['REQUEST_METHOD']=='POST'){
       $name = $_POST['name'];

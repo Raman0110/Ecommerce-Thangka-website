@@ -21,9 +21,9 @@
     if($result1){
       if(mysqli_num_rows($result1)>0){
         $row1 = mysqli_fetch_assoc($result1);
+      }else{
+        header('location:error.php');
       }
-    }else{
-      header('location:view-user.php');
     }
 
 

@@ -6,7 +6,7 @@
   if($result){
     header('location:view-product-category.php');
   }else{
-    header('location:view-user.php');
+    header('location:error.php');
   }
 
 

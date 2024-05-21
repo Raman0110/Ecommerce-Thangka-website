@@ -20,7 +20,7 @@
   if(mysqli_num_rows($result)>0){
     $row = mysqli_fetch_assoc($result);
   }else{
-    header('location:view-user.php');
+    header('location:error.php');
   }
   if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $userName = $_POST['nusername'];
