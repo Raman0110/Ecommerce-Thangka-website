@@ -17,13 +17,13 @@
   require('session.php');
   ?>
   <?php
-  include 'connect.php';
+  include 'header.php';
   $id = $_GET['id'];
   $sql = "SELECT * FROM blogs WHERE id = $id";
   $result = mysqli_query($conn, $sql);
-  if (mysqli_num_rows($result)>0) {
+  if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-  }else{
+  } else {
     header('location:error404.php');
   }
   $sql2 = "SELECT * FROM blogCategories WHERE id = " . $row['categoryId'] . "";
@@ -33,101 +33,6 @@
   }
 
   ?>
-  <header class="header">
-    <div class="container">
-      <div class="flex">
-        <div class="logo">
-          <h2>Logo</h2>
-        </div>
-        <nav class="nav">
-          <ul>
-            <li>
-              <a href="index.php">Home</a>
-            </li>
-            <li>
-              <a href="aboutus.php">About</a>
-            </li>
-            <?php
-            $navSql = "SELECT * FROM categories LIMIT 3";
-            $navResult = mysqli_query($conn, $navSql);
-            if ($navResult) {
-              if (mysqli_num_rows($navResult) > 0) {
-                while ($navs = mysqli_fetch_assoc($navResult)) {
-                  echo
-                  "          
-                    <li>
-                      <a href='product-category.php?id=" . $navs['ID'] . "'>" . $navs['Name'] . "</a>
-                    </li>
-                    ";
-                }
-              }
-            }
-            ?>
-            <li>
-              <a href="blog.php">Blog</a>
-            </li>
-            <li>
-              <a href="contactus.php">Contact</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="icons">
-          <a href="#"><i class="fa fa-search fa-2x icon" aria-hidden="true" id="search-btn"></i></a>
-          <?php
-          if (isset($_SESSION['username'])) {
-            echo
-            "
-            <a href='user-profile.php'><i class='fa fa-user-circle fa-2x icon' aria-hidden='true'></i></a>
-            <a href = 'cart.php'><i class='fa fa-shopping-cart fa-2x icon'></i></a>
-            <a href = 'logout.php'><i class='fa fa-sign-out fa-2x icon'></i></a>
-            ";
-          } else {
-            echo
-            "
-            <a href='login.php' class='login-btn'>Login</a>
-            ";
-          }
-          ?>
-          <i class="fa fa-bars fa-2x icon" id="bars" aria-hidden="true"></i>
-        </div>
-        <div class="mobile-nav">
-          <div class="menu-exit">
-            <i class="fa fa-times fa-lg" id="exit-icon"></i>
-          </div>
-          <div class="navigations">
-            <ul>
-              <li>
-                <a href="" class="active">Home</a>
-              </li>
-              <li>
-                <a href="aboutus.php">About</a>
-              </li>
-              <li>
-                <a href="">Green Tara</a>
-              </li>
-              <li>
-                <a href="">Manjushree</a>
-              </li>
-              <li>
-                <a href="">Buddha Life</a>
-              </li>
-              <li>
-                <a href="">Mandala</a>
-              </li>
-              <li>
-                <a href="contactus.php">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="searchForm d-none">
-      <form action="search-item.php" method="GET">
-        <input type="text" placeholder="Search" id="searchBox" name="search">
-      </form>
-    </div>
-  </header>
   <section class="breadcrumb">
     <div class="container">
       <div class="breadcrumb-content flex">
@@ -186,35 +91,9 @@
       </div>
     </div>
   </section>
-  <footer>
-    <div class="container">
-      <div class="footer-content flex">
-        <div class="footer-section">
-          <h3>Logo</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio, sed. Molestiae quam porro dolores aspernatur excepturi esse cum accusamus deserunt?</p>
-        </div>
-        <div class="footer-section">
-          <div class="m-auto">
-            <h4>Quick links</h4>
-            <ul>
-              <li><a href="index.php">Home</a></li>
-              <li><a href="">About us</a></li>
-              <li><a href="">Contact us</a></li>
-              <li><a href="blog.php">Blog</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-section">
-          <h4>Contact us</h4>
-          <ul>
-            <li><a href=""><i class="fa fa-phone"></i>+977 9800000000</a></li>
-            <li><a href=""><i class="fa fa-envelope"></i>mythankas@gmail.com</a></li>
-            <li><a href=""><i class="fa fa-map-marker"></i>Boudha-06, Kathmandu</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <?php
+  include 'footer.php';
+  ?>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
 </body>

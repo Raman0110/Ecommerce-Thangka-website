@@ -1,4 +1,6 @@
-<?php require('../session.php'); issetUsername()     ?>  <!DOCTYPE html>
+<?php require('../session.php');
+issetUsername()     ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,11 +16,15 @@
   <?php
   $Msg = '';
   include '../connect.php';
-  $id = $_GET['id'];
-  $sql = "SELECT * FROM products WHERE ID = $id";
-  $result = mysqli_query($conn,$sql);
-  if(mysqli_num_rows($result)>0){
-    $row = mysqli_fetch_assoc($result);
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM products WHERE ID = $id";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
+    } else {
+      header('location:error.php');
+    }
   }else{
     header('location:error.php');
   }
@@ -27,109 +33,54 @@
     $size = $_POST['size'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-    $description = mysqli_real_escape_string($conn,$_POST['description']);
+    $description = mysqli_real_escape_string($conn, $_POST['description']);
     $uploadDir = '../uploads/';
     $fileName = $_FILES['image']['name'];
-    if(empty($fileName)){
+    if (empty($fileName)) {
       $sql2 = "UPDATE products SET Title = '$productName',Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size' WHERE ID = $id ";
       $result2  = mysqli_query($conn, $sql2);
+      if ($result2) {
+        header('location:view-product.php');
+        $Msg = 'Product Edited successfully';
+      } else {
+        $Msg = 'Unable to edit post';
+      }
+    } else {
+      $newFile = pathinfo($_FILES['image']['name'], PATHINFO_FILENAME) . date('YmdHis') . '.' . pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+      $targetDir = $uploadDir . $newFile;
+      if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
+        $sql2 = "UPDATE products SET Title = '$productName', Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size', Image_URL = '$newFile' WHERE ID = $id ";
+        $result2  = mysqli_query($conn, $sql2);
         if ($result2) {
-            header('location:view-product.php');
-            $Msg = 'Product Edited successfully';
-        }else{
-            $Msg = 'Unable to edit post';
+          $Msg = 'Product Edited successfully';
+          header('location:view-product.php');
+        } else {
+          $Msg = 'Unable to edit post';
         }
-      }else{
-        $newFile = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
-        $targetDir = $uploadDir.$newFile;
-        if(move_uploaded_file($_FILES['image']['tmp_name'],$targetDir)){
-            $sql2 = "UPDATE products SET Title = '$productName', Description = '$description',Category_ID = '$category', Price = '$price', Dimensions = '$size', Image_URL = '$newFile' WHERE ID = $id ";
-            $result2  = mysqli_query($conn, $sql2);
-            if ($result2) {
-                $Msg = 'Product Edited successfully';
-                  header('location:view-product.php');
-              }else{
-                $Msg = 'Unable to edit post';
-              }   
-        }
+      }
     }
-    }
+  }
   ?>
   <div class="layout-container">
-    <aside class="sidebar">
-      <h2>Logo</h2>
-      <ul class="sidebar-nav">
-        <li><a href="dashboard.php">Dashboard</a></li>
-        <li class="dropdown">
-          <div class="flex justify-between">
-            Product <i class="fa fa-angle-down fa-1x"></i>
-          </div>
-          <ul class="dropdown-menu d-none">
-            <li><a href="view-product.php">View Product</a></li>
-            <li><a href="add-product.php">Add Product</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <div class="flex justify-between">
-            Product Category <i class="fa fa-angle-down fa-1x"></i>
-          </div>
-          <ul class="dropdown-menu d-none">
-            <li>
-              <a href="view-product-category.php">View Product Category</a>
-            </li>
-            <li>
-              <a href="add-product-category.php">Add Product Category</a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-        <div class=" flex justify-between">
-            Users<i class="fa fa-angle-down fa-1x"></i>
-          </div>
-          <ul class="dropdown-menu d-none">
-            <li><a href="view-user.php">View Users</a></li>
-            <li><a href="add-user.php">Add User</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <div class="flex justify-between">
-            Blog <i class="fa fa-angle-down fa-1x"></i>
-          </div>
-          <ul class="dropdown-menu d-none">
-            <li><a href="view-blog.php">View Blog</a></li>
-            <li><a href="add-blog.php">Add Blog</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <div class="flex justify-between">
-            Blog Category <i class="fa fa-angle-down fa-1x"></i>
-          </div>
-          <ul class="dropdown-menu d-none">
-            <li><a href="view-blog-category.php">View Blog Category</a></li>
-            <li><a href="add-blog-category.php">Add Blog Category</a></li>
-          </ul>
-        </li>
-      </ul>
-    </aside>
+    <?php
+    include 'side-bar.php';
+    ?>
     <main class="main-section">
-      <div class="top-bar flex">
-        <div class="icons">
-          <a href="admin-profile.php"><i class="fa fa-user fa-2x "></i></a>
-          <a href = '../logout.php'><i class="fa fa-sign-out fa-2x"></i></a>
-        </div>
-      </div>
+      <?php
+      include 'top-bar.php';
+      ?>
       <div class="add-form">
         <h3 class="heading">Edit Product</h3>
         <div class="form-container">
           <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateProduct(false)" method="POST" enctype="multipart/form-data">
             <div class="form-input">
               <label for="p-name">Product Name</label>
-              <input type="text" name="p-name" id="p-name" value = "<?php echo $row['Title']?>"/>
+              <input type="text" name="p-name" id="p-name" value="<?php echo $row['Title'] ?>" />
               <p class="error" id="p-name-error"></p>
             </div>
             <div class="form-input">
               <label for="size">Size</label>
-              <input type="text" name="size" id="size" value = "<?php echo $row['Dimensions']?>"/>
+              <input type="text" name="size" id="size" value="<?php echo $row['Dimensions'] ?>" />
               <p class="error" id="size-error"></p>
             </div>
             <div class="form-input">
@@ -142,7 +93,7 @@
                 $result1 = mysqli_query($conn, $sql1);
                 if (mysqli_num_rows($result1) > 0) {
                   while ($row1 = mysqli_fetch_assoc($result1)) {
-                    echo "<option value='".$row1['ID']."'".($row['Category_ID']===$row1["ID"]?"selected":"").">".$row1['Name']."</option>";
+                    echo "<option value='" . $row1['ID'] . "'" . ($row['Category_ID'] === $row1["ID"] ? "selected" : "") . ">" . $row1['Name'] . "</option>";
                   }
                 }
                 ?>
@@ -151,12 +102,12 @@
             </div>
             <div class="form-input">
               <label for="price">Price</label>
-              <input type="text" name="price" id="price" value = "<?php echo $row['Price']?>"/>
+              <input type="text" name="price" id="price" value="<?php echo $row['Price'] ?>" />
               <p class="error" id="price-error"></p>
             </div>
             <div class="form-input">
               <label for="description">Description</label>
-              <textarea name="description" id="description" rows="5"><?php echo $row['Description']?></textarea>
+              <textarea name="description" id="description" rows="5"><?php echo $row['Description'] ?></textarea>
               <p class="error" id="description-error"></p>
             </div>
             <div class="form-input">

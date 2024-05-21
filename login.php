@@ -28,6 +28,7 @@
       if (mysqli_num_rows($result) > 0) {
         $_SESSION['username'] = $userName;
         $row = mysqli_fetch_assoc($result);
+        $_SESSION['user-id'] = $row['userid'];
         $isAdmin = $row['isadmin'];
         if($isAdmin){
           $_SESSION['isAdmin'] = true;

@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       echo
       "
           <script>
-          alert('Order placed successfully');
+          alert('Order placed successfully. View your orders from profile');
           window.history.go(-1);
           </script>
           ";
