@@ -164,25 +164,25 @@
           </div>
           <div class="feature-text">
             <h4>Fast Shipping</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-search fa-2x" aria-hidden="true"></i>
           </div>
           <div class="feature-text">
-            <h4>Fast Shipping</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
+            <h4>Quality Art</h4>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis</p>
           </div>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fa fa-truck fa-2x" aria-hidden="true"></i>
+            <i class="fa fa-paint-brush fa-2x" aria-hidden="true"></i>
           </div>
           <div class="feature-text">
-            <h4>Fast Shipping</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis, debitis quae dolorum?</p>
+            <h4>Purely Handmade</h4>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde rem veniam blanditiis</p>
           </div>
         </div>
       </div>

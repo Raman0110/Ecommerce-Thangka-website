@@ -157,7 +157,7 @@ issetUsername(); ?>
                 if ($totalTurnoverResult) {
                   $turnOver = mysqli_fetch_assoc($totalTurnoverResult);
                   $amount  = $turnOver['total']>0?'Rs'.$turnOver['total']:0;
-                  echo "<h4 id='turnOver'>$amount</h4>";
+                  echo "$amount";
                 }
                 ?>
               </span>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,6 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="responsive.css">
 </head>
-
 <body>
   <?php
   require('session.php');
@@ -31,7 +29,6 @@
   if ($result2) {
     $row2 = mysqli_fetch_assoc($result2);
   }
-
   ?>
   <section class="breadcrumb">
     <div class="container">
@@ -51,42 +48,29 @@
         </div>
         <div class="related-product">
           <h2>Recent Post</h2>
-          <div class="more-product more-blog flex">
-            <div class="image">
-              <img src="./buddha.jpg" alt="">
-            </div>
-            <div class="info">
-              <h4>50 Facts about Mandala Art</h4>
-              <p><i class="fa fa-calendar"></i>April 7, 2024</p>
-            </div>
-          </div>
-          <div class="more-product more-blog flex">
-            <div class="image">
-              <img src="./Green-Tara.jpg" alt="">
-            </div>
-            <div class="info">
-              <h4>50 Facts about Mandala Art</h4>
-              <p><i class="fa fa-calendar"></i>April 7, 2024</p>
-            </div>
-          </div>
-          <div class="more-product more-blog flex">
-            <div class="image">
-              <img src="./mandala.jpg" alt="">
-            </div>
-            <div class="info">
-              <h4>50 Facts about Mandala Art</h4>
-              <p><i class="fa fa-calendar"></i>April 7, 2024</p>
-            </div>
-          </div>
-          <div class="more-product more-blog flex">
-            <div class="image">
-              <img src="./mandala.jpg" alt="">
-            </div>
-            <div class="info">
-              <h4>50 Facts about Mandala Art</h4>
-              <p><i class="fa fa-calendar"></i>April 7, 2024</p>
-            </div>
-          </div>
+          <?php
+          $relatedBlogSql = "SELECT * FROM blogs LIMIT 3";
+          $relatedBlogResult = mysqli_query($conn,$relatedBlogSql);
+          if($relatedBlogResult){
+            if(mysqli_num_rows($relatedBlogResult)>0){
+              while($relatedBlogRow = mysqli_fetch_assoc($relatedBlogResult)){
+                echo
+                "   <a href='blog-single.php?id=".$relatedBlogRow['id']."'>
+                    <div class='more-product more-blog flex'>
+                      <div class='image'>
+                        <img src='uploads/" . $relatedBlogRow['image'] . "'>
+                      </div>
+                      <div class='info'>
+                        <h4>".$relatedBlogRow['title']."</h4>
+                        <p><i class='fa fa-calendar'></i>".$relatedBlogRow['Date']."</p>
+                      </div>
+                    </div>
+                    </a>  
+                ";
+              }
+            }
+          }
+          ?>
         </div>
       </div>
     </div>
@@ -97,5 +81,4 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
-
 </html>

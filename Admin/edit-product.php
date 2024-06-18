@@ -72,7 +72,7 @@ issetUsername()     ?>
       <div class="add-form">
         <h3 class="heading">Edit Product</h3>
         <div class="form-container">
-          <form action="<?php echo $_SERVER['PHP_SELF'] ?>" onsubmit="return validateProduct(false)" method="POST" enctype="multipart/form-data">
+          <form action="" onsubmit="return validateProduct(false)" method="POST" enctype="multipart/form-data">
             <div class="form-input">
               <label for="p-name">Product Name</label>
               <input type="text" name="p-name" id="p-name" value="<?php echo $row['Title'] ?>" />

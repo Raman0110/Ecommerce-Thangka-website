@@ -74,7 +74,7 @@ issetUsername()     ?>
             <div class="add-form">
                 <h3 class="heading">Edit Blog</h3>
                 <div class="form-container">
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
+                    <form action="" method="POST" onsubmit="return validateBlog(false)" enctype="multipart/form-data">
                         <div class="form-input">
                             <label for="name">Blog Title</label>
                             <input type="text" name="name" id="b-name" value="<?php echo $row['title'] ?>" />
@@ -121,3 +121,5 @@ issetUsername()     ?>
 </body>
 
 </html>
+
+

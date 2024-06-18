@@ -12,6 +12,7 @@
 
 <body>
   <?php
+  include '../connect.php';
   
   
   $Msg = '';
@@ -24,9 +25,8 @@
     $fileName = pathinfo($_FILES['image']['name'],PATHINFO_FILENAME).date('YmdHis').'.'.pathinfo($_FILES['image']['name'],PATHINFO_EXTENSION);
     $targetDir = $uploadDir.$fileName;
     $Date = date('Y-m-d');
-    include '../connect.php';
     if (move_uploaded_file($_FILES['image']['tmp_name'], $targetDir)) {
-      $sql = "INSERT INTO blogs(title,categoryId,description,Date,image) values ('$name','$category','$description','$Date','$fileName')";
+      $sql = "INSERT INTO blogs(title,categoryId,description,Date,image) VALUES('$name','$category','$description','$Date','$fileName')";
       $result = mysqli_query($conn, $sql);
       if ($result) {
         $Msg = 'Blog added successfully';
@@ -73,8 +73,6 @@
                     }
                   }
                 }
-
-
                 ?>
               </select>
               <p class="error" id="b-category-error"></p>
